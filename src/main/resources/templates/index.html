@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title></title>
+</head>
+<style>
+    /*字体*/
+    body {
+        line-height: 24px;
+        font: 13px Helvetica Neue, Helvetica, PingFang SC, Tahoma, Arial, sans-serif;
+        color: #f4f4f4;
+    }
+    /*滚动轮*/
+    ::-webkit-scrollbar {
+        width: 5px;
+        height: 5px;
+        background-color: #f4f4f4;
+    }
+    ::-webkit-scrollbar-thumb {
+        border-radius: 50px;
+        background-color: #afb3bf!important;
+    }
+    ::-webkit-scrollbar-track {
+        background-color: #f1f1f1;
+    }
+    /* header */
+    #mao-header{
+        border-bottom: 1px solid #f4f4f4;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 50px;
+        z-index: 100;
+    }
+    #mao-sidebar{
+        width: 245px;
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        z-index: 101;
+        overflow: hidden;
+        background-color: #444!important;
+        box-shadow: 2px 0 5px #999;
+    }
+    #mao-body{
+        position: fixed;
+        left: 245px;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        padding-top: 55px;
+        float: left;
+        width: auto;
+        overflow: hidden;
+        overflow-y: auto;
+        box-sizing: border-box;
+        z-index: 98;
+        background-color: #333!important;
+    }
+    .mao-side-top{
+        height: 50px;
+        width: 100%;
+        line-height: 50px;
+        font-size: 22px;
+        letter-spacing: 2px;
+        text-align: center;
+        color: gold;
+    }
+    .mao-dark-side-top{
+        background-color: #555;
+    }
+    .mao-side-top span{
+
+    }
+</style>
+<body>
+    <div id="mao-header">
+
+    </div>
+    <div id="mao-sidebar">
+        <div class="mao-side-top mao-dark-side-top">
+            <span>MAO管理系统</span>
+        </div>
+    </div>
+    <div id="mao-body">
+        <h1>hello world</h1>
+    </div>
+</body>
+
+</html>
