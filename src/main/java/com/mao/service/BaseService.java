@@ -1,5 +1,8 @@
 package com.mao.service;
 
+import com.mao.entity.ErrMsg;
+import com.mao.entity.ResponseData;
+import com.mao.entity.ResponseEnum;
 import com.mao.entity.sys.User;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
@@ -17,12 +20,24 @@ public class BaseService {
         return SecurityUtils.getSubject();
     }
 
-    protected User getCurrentUser(){
-        return (User) getSubject().getPrincipal();
+    public <T> ResponseData<T> ok(T data){
+        return data(ResponseEnum.SUCCESS,data);
     }
 
-    protected Session getSession(){
-        return getSubject().getSession();
+    public  ResponseData bad(String msg){
+        return data(ResponseEnum.BAD_REQUEST,new ErrMsg(msg));
+    }
+
+    public ResponseData error(String msg){
+        return data(ResponseEnum.ERROR,new ErrMsg(msg));
+    }
+
+    public ResponseData permission(String msg){
+        return data(ResponseEnum.PERMISSION,new ErrMsg(msg));
+    }
+
+    private <T> ResponseData<T> data(ResponseEnum type, T data){
+        return new ResponseData<>(type.getType(),data);
     }
 
 }
