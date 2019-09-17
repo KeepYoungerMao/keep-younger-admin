@@ -58,6 +58,13 @@
 			<optional>true</optional>
 		</dependency>
 
+		<!-- hot -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+            <scope>true</scope>
+		</dependency>
+
 		<!-- fast json -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
@@ -102,6 +109,8 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<mainClass>com.mao.KeepYoungerAdminApplication</mainClass>
+					<fork>true</fork>
+					<addResources>true</addResources>
 				</configuration>
 			</plugin>
 		</plugins>

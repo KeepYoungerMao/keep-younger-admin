@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
@@ -7,11 +7,13 @@
 </head>
 
 <body>
-<label for="name">用户名：</label><input id="name" type="text" name="u">
-<label for="pass">密码：</label><input id="pass" type="text" name="p">
-<button onclick="login()">登录</button>
+<div id="login">
+    <label for="name">用户名：</label><input id="name" type="text" name="u">
+    <label for="pass">密码：</label><input id="pass" type="text" name="p">
+    <button onclick="login()">登录</button>
+</div>
 </body>
-<script src="../static/js/jquery-1-11-3.js"></script>
+<script th:src="@{/static/js/jquery-1-11-3.js}"></script>
 <script>
     function login() {
         var u = $("#name").val();

@@ -12,5 +12,5 @@ import lombok.Setter;
 public class Permission {
     private int id;                 //id
     private String url;             //权限名称
-    private String name;            //权限介绍
+    private String intro;           //权限介绍
 }

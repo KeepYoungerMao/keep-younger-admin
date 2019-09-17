@@ -1,0 +1,51 @@
+/* 整体字体颜色 */
+.dark{
+    color: #f4f4f4;
+}
+
+/* 头部 */
+.dark .mao-header{
+    border-bottom: 1px solid #999;
+}
+
+/* 左边 */
+.dark .mao-sidebar{
+    background-color: #444!important;
+    box-shadow: 2px 0 5px #999;
+}
+.dark .mao-sidebar .mao-side-top{
+    color: gold;
+    background-color: #555555;
+}
+.dark .mao-sidebar .mao-side-top a i{
+    color: #ff9917;
+}
+.dark .mao-sidebar .mao-side-top a{
+    color: gold;
+}
+.dark .mao-menu .mao-menu-item{
+    border-right: 4px solid #444;
+}
+.dark .mao-menu .mao-menu-item:hover{
+    background-color: #555555;
+    border-right: 4px solid #888;
+}
+.dark .mao-menu .mao-item-p a{
+    color: #c1c1c1;
+}
+.dark .mao-menu .mao-item-s a{
+    color: #e1e1e1;
+}
+.dark .mao-menu .mao-item-p{
+    background-color: #444444;
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333;
+}
+.dark .mao-menu .mao-item-s{
+    background-color: #4a4a4a;
+}
+
+/* 主界面 */
+.dark .mao-body{
+    background-color: #333!important;
+}

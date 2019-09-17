@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title></title>
+</head>
+
+<body>
+
+<div class="mao-sidebar" th:fragment="side">
+    <div class="mao-side-top">
+        <a href="/"><i class="fa fa-ravelry"></i><span> MAO管理系统</span></a>
+    </div>
+    <div class="mao-menu">
+        <div>
+            <div class="mao-menu-item mao-item-p">
+                <a href="javascript:void(0);">
+                    <i class="fa fa-user"></i>
+                    <span>系统管理</span>
+                </a>
+                <i class="mao-zs fa fa-angle-down"></i>
+            </div>
+            <div class="mao-menu-item mao-item-s">
+                <a href="/sys/user">
+                    <i class="fa fa-scribd"></i>
+                    <span>用户管理</span>
+                </a>
+            </div>
+            <div class="mao-menu-item mao-item-s">
+                <a href="/sys/permission">
+                    <i class="fa fa-scribd"></i>
+                    <span>角色权限管理</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(".mao-item-p").on("click",function () {
+            if($(this).hasClass("mao-open")){
+                $(this).removeClass("mao-open");
+                $(this).siblings().css("height","0");
+            }else{
+                $(this).addClass("mao-open");
+                $(this).siblings().css("height","44px");
+            }
+        });
+    </script>
+
+</div>
+
+</body>
+
+</html>
