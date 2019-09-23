@@ -6,6 +6,7 @@ import com.mao.entity.sys.Permission;
 import com.mao.entity.sys.Role;
 import com.mao.entity.sys.User;
 import com.mao.mapper.sys.SystemMapper;
+import com.mao.mapper.sys.UserMapper;
 import com.mao.service.BaseService;
 import com.mao.service.sys.LoginService;
 import org.apache.shiro.authc.*;
@@ -26,6 +27,9 @@ public class LoginServiceImpl extends BaseService implements LoginService {
     private SystemMapper systemMapper;
 
     @Resource
+    private UserMapper userMapper;
+
+    @Resource
     private Config config;
 
     @Override
@@ -37,6 +41,7 @@ public class LoginServiceImpl extends BaseService implements LoginService {
         try {
             subject.login(token);
             User user = getUserByLogin(u);
+            user.setUser_pass("");  //去除密码
             return ok(user);
         } catch (IncorrectCredentialsException e){
             return permission("密码错误");
@@ -74,6 +79,6 @@ public class LoginServiceImpl extends BaseService implements LoginService {
      */
     @Override
     public User getUserByLogin(String login) {
-        return systemMapper.getUserByLogin(login);
+        return userMapper.getUserByLogin(login);
     }
 }

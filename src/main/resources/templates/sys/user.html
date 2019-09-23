@@ -6,17 +6,215 @@
     <title>用户管理</title>
     <link rel="stylesheet" th:href="@{/static/css/common.css}">
     <link rel="stylesheet" th:href="@{/static/css/dark.css}">
+    <link rel="stylesheet" th:href="@{/static/css/sys/user.css}">
     <link rel="stylesheet" th:href="@{/static/font-awesome-4.7.0/css/font-awesome.min.css}">
 </head>
 <script th:src="@{/static/js/jquery-1-11-3.js}"></script>
 <body>
-<div class="dark">
+<div class="super dark">
     <div th:replace="common/header::header"></div><!-- header -->
     <div th:replace="common/side::side"></div><!-- side -->
-    <div class="mao-body">
-        <h1 class="title-tips">用户管理页面</h1>
+    <div class="mao-body"><!-- body -->
+        <div class="mao-sign">
+            <span>系统管理</span><span>/</span><span>用户管理</span>
+        </div>
+        <div class="mao-search">
+            <label for="role">角色：</label>
+            <select id="role">
+                <option value="0">全部</option>
+                <option value="1">admin</option>
+                <option value="2">developer</option>
+            </select>
+            <label for="name">用户名：</label>
+            <input type="text" id="name">
+            <label for="login">登录名：</label>
+            <input type="text" id="login">
+            <button class="green" onclick="search()">
+                <i class="fa fa-search"></i><span>检索</span>
+            </button>
+            <button class="green" onclick="save()">
+                <i class="fa fa-plus-square-o"></i><span>新增</span>
+            </button>
+        </div>
+        <div class="mao-data">
+            <table id="user-data" border="1" cellspacing="0" cellpadding="0" width="98%">
+                <tr>
+                    <th width="10%">序号</th>
+                    <th width="15%">名称</th>
+                    <th width="15%">登录名</th>
+                    <th width="15%">状态</th>
+                    <th width="15%">角色</th>
+                    <th width="30%">操作</th>
+                </tr>
+            </table>
+        </div>
+        <div class="mao-page">
+            <button onclick="pre_page()">上一页</button>
+            <button onclick="next_page()">下一页</button>
+            <span>
+                当前页：<b id="current_page">1</b>&nbsp;&nbsp;&nbsp;|&nbsp;
+                总页数：<b id="total_page">1</b>
+            </span>
+        </div>
     </div>
+
+    <!-- intro box -->
+    <div id="user-intro" class="mao-box-zzc">
+        <div class="mao-box-point">
+            <div class="mao-box">
+                <div class="mao-box-title">
+                    <i class="fa fa-address-card-o warn"></i>
+                    <span>用户详细信息</span>
+                    <i class="fa fa-times mao-box-close" onclick="intro_close()"></i>
+                </div>
+                <div class="mao-box-content"></div>
+                <div class="mao-box-bottom">
+                    <button class="cancel" onclick="intro_close()">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--loading box-->
+    <div id="loading" class="mao-box-zzc mao-load-zzc">
+        <div class="mao-box-point">
+            <i class="fa fa-spinner fa-pulse fa-3x"></i>
+        </div>
+    </div>
+
+    <!-- edit/add box-->
+    <div id="user-edit" class="mao-box-zzc">
+        <input type="hidden" id="id">
+        <div class="mao-box-point">
+            <div class="mao-box">
+                <div class="mao-box-title">
+                    <i class="fa fa-address-card-o warn"></i>
+                    <span id="user-edit-title">新建用户</span>
+                    <i class="fa fa-times mao-box-close" onclick="edit_close()"></i>
+                </div>
+                <div class="mao-box-content">
+                    <table border="0">
+                        <tr>
+                            <td class="edit-name"><label for="user_name">姓名：</label></td>
+                            <td class="edit-input">
+                                <input type="text" id="user_name">
+                            </td>
+                            <td class="edit-error">
+                                <span>2-10中文字符</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="edit-name"><label for="user_login">登录名：</label></td>
+                            <td class="edit-input">
+                                <input type="text" id="user_login">
+                            </td>
+                            <td class="edit-error">
+                                <span>4-16中英文字符，不含特殊符号</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="edit-name"><label for="user_pass">密码：</label></td>
+                            <td class="edit-input">
+                                <input type="text" id="user_pass">
+                            </td>
+                            <td class="edit-error">
+                                <span>6-20英文字符，不含特殊符号</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="edit-name"><label for="user_role">角色：</label></td>
+                            <td class="edit-input">
+                                <select id="user_role">
+                                    <option value="1">admin</option>
+                                </select>
+                            </td>
+                            <td class="edit-error"></td>
+                        </tr>
+                        <tr>
+                            <td class="edit-name"><label for="company">公司名称：</label></td>
+                            <td class="edit-input">
+                                <input type="text" id="company">
+                            </td>
+                            <td class="edit-error">
+                                <span>4-20中英文字符</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="edit-name"><label for="dept">部门名称：</label></td>
+                            <td class="edit-input">
+                                <input type="text" id="dept">
+                            </td>
+                            <td class="edit-error">
+                                <span>1-20中英文字符</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="edit-name"><label for="identity_code">身份证号：</label></td>
+                            <td class="edit-input">
+                                <input type="text" id="identity_code">
+                            </td>
+                            <td class="edit-error">
+                                <span>18位数字</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="edit-name"><label for="address">现住地址：</label></td>
+                            <td class="edit-input">
+                                <textarea id="address"></textarea>
+                            </td>
+                            <td class="edit-error">
+                                <span>1-50中英文字符</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="edit-name"><label for="phone">手机号：</label></td>
+                            <td class="edit-input">
+                                <input type="text" id="phone">
+                            </td>
+                            <td class="edit-error">
+                                <span>11位正确格式手机号</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="edit-name"><label for="email">邮箱地址：</label></td>
+                            <td class="edit-input">
+                                <input type="text" id="email">
+                            </td>
+                            <td class="edit-error">
+                                <span>正确格式邮箱地址</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="edit-name"><label for="qq">QQ号：</label></td>
+                            <td class="edit-input">
+                                <input type="text" id="qq">
+                            </td>
+                            <td class="edit-error">
+                                <span>4-16位数字（非必填选项）</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="edit-name"><label for="wx">微信号：</label></td>
+                            <td class="edit-input">
+                                <input type="text" id="wx">
+                            </td>
+                            <td class="edit-error">
+                                <span>1-30中英文字符（非必填选项）</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="mao-box-bottom">
+                    <button class="clear" onclick="clear()">清空</button>
+                    <button class="yes" onclick="update_save_do()">保存</button>
+                    <button class="cancel" onclick="edit_close()">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 </body>
-
+<script th:src="@{/static/js/util/pop.js}"></script>
+<script th:src="@{/static/js/sys/user.js}"></script>
 </html>

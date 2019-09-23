@@ -3,6 +3,30 @@
     color: #f4f4f4;
 }
 
+/*input*/
+.dark input,.dark select,.dark textarea{
+    border: 1px solid #777777;
+    background-color: #666666;
+    color: #f4f4f4;
+}
+.dark input:hover,.dark input:focus,.dark input:checked,.dark input:active,
+.dark select:hover,.dark select:focus,.dark select:checked,.dark select:active,
+.dark textarea:hover,.dark textarea:focus,.dark textarea:checked,.dark textarea:active{
+    border: 1px solid #999999;
+}
+
+
+/*button*/
+.dark button{
+    /*border: 1px solid #005b00;
+    background-color: #008300;*/
+    color: #f4f4f4;
+}
+.dark button:hover,.dark button:focus,.dark button:checked,.dark button:active{
+    /*border: 1px solid #004400;
+    background-color: #006b00;*/
+}
+
 /* 头部 */
 .dark .mao-header{
     border-bottom: 1px solid #999;
@@ -48,4 +72,82 @@
 /* 主界面 */
 .dark .mao-body{
     background-color: #333!important;
+}
+.dark .mao-sign{
+    border-left: 4px solid green;
+    color: #d3d3d3;
+}
+.dark .mao-search{
+    background-color: #555555;
+}
+.dark .mao-search label{
+    color: #aaaaaa;
+}
+.dark .mao-search button{
+    border: 1px solid #005b00;
+    background-color: #008300;
+}
+.dark .mao-data{
+    color: #f4f4f4;
+}
+.dark .mao-data th{
+    color: #aaaaaa;
+}
+.dark .mao-page button{
+    background-color: #444444;
+    border: 1px solid #232323;
+}
+.dark .mao-page button:hover{
+    background-color: #555555;
+    border: 1px solid #333333;
+}
+
+
+/*弹框*/
+.dark .mao-pop-zzc, .dark .mao-box-zzc{
+    background-color: rgba(69, 69, 69, 0.3);
+}
+.dark .mao-load-zzc{
+    background-color: rgba(69, 69, 69, 0.6);
+}
+.dark .mao-pop, .dark .mao-box{
+    background-color: #666666;
+    border: 1px solid #353535;
+    color: #d3d3d3;
+    box-shadow: 0 0 10px #454545;
+}
+.dark .mao-tips span{
+    background-color: #666666;
+    color: #fafafa;
+}
+.dark .mao-pop-title, .dark .mao-box-title{
+    background-color: #555555;
+    border-bottom: 1px solid #444444;
+}
+.dark .mao-box-content{
+    border-bottom: 1px solid #444444;
+}
+.dark .mao-pop-bottom .clear, .dark .mao-box-bottom .clear{
+    background-color: #f3be20;
+    border: 1px solid #f3be20;
+}
+.dark .mao-pop-bottom .clear:hover, .dark .mao-box-bottom .clear:hover{
+    background-color: #bd8f1c;
+    border: 1px solid #bd8f1c;
+}
+.dark .mao-pop-bottom .yes, .dark .mao-box-bottom .yes{
+    background-color: #1c4a31;
+    border: 1px solid #153724;
+}
+.dark .mao-pop-bottom .yes:hover, .dark .mao-box-bottom .yes:hover{
+    background-color: #2c734c;
+    border: 1px solid #1f5135;
+}
+.dark .mao-pop-bottom .cancel, .dark .mao-box-bottom .cancel{
+    background-color: #4a4120;
+    border: 1px solid #302a15;
+}
+.dark .mao-pop-bottom .cancel:hover, .dark .mao-box-bottom .cancel:hover{
+    background-color: #675a2d;
+    border: 1px solid #4a4120;
 }

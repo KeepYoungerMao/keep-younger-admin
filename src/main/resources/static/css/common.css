@@ -4,6 +4,65 @@ body {
     font: 13px Helvetica Neue, Helvetica, PingFang SC, Tahoma, Arial, sans-serif;
 }
 
+/*a标签*/
+a{
+    text-decoration: none;
+    outline: none;
+}
+
+/*颜色*/
+.green{
+    color: green;
+    border-color: green;
+}
+.green:hover{
+    color: #00a500;
+    border-color: #00a500;
+}
+.warn{
+    color: #c4941d;
+    border-color: #c4941d;
+}
+.warn:hover{
+    color: #f3be20;
+    border-color: #f3be20;
+}
+.danger{
+    color: orangered;
+    border-color: orangered;
+}
+.danger:hover{
+    color: #ff6f23;
+    border-color: #ff6f23;
+}
+
+/*input, select*/
+input,select{
+    height: 24px;
+    line-height: 24px;
+    border-radius: 4px;
+    outline: none;
+    padding-left: 10px;
+}
+select{
+    height: 28px;
+    min-width: 170px;
+}
+textarea{
+    min-height: 50px;
+    min-width: 170px;
+    vertical-align: middle;
+}
+
+/*button*/
+button{
+    height: 29px;
+    padding: 0 10px;
+    vertical-align: middle;
+    border-radius: 4px;
+    outline: none;
+}
+
 /*滚动轮*/
 ::-webkit-scrollbar {
     width: 5px;
@@ -102,6 +161,7 @@ body {
     bottom: 0;
     right: 0;
     padding-top: 55px;
+    padding-left: 10px;
     float: left;
     width: auto;
     overflow: hidden;
@@ -112,4 +172,149 @@ body {
 .mao-body .title-tips{
     text-align: center;
     margin-top: 100px;
+}
+.mao-sign{
+    height: 22px;
+    line-height: 22px;
+    font-size: 15px;
+    margin-top: 5px;
+}
+.mao-sign span{
+    padding-left: 4px;
+}
+.mao-search{
+    margin-top: 10px;
+    padding: 5px 10px;
+    vertical-align: middle;
+}
+.mao-search input, .mao-search select, .mao-search button{
+    margin-right: 20px;
+}
+.mao-search select,.mao-search label{
+    vertical-align: middle;
+}
+.mao-search button span{
+    padding-left: 5px;
+}
+.mao-data{
+    margin-top: 10px;
+    font-size: 14px;
+}
+.mao-data th,.mao-data td{
+    height: 26px;
+    line-height: 26px;
+    text-align: left;
+    padding-left: 5px;
+}
+.mao-data td a{
+    padding: 1px 4px;
+    margin: 0 4px;
+    border: 1px solid;
+    border-radius: 4px;
+}
+.mao-page{
+    margin-top: 20px;
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+}
+.mao-page button{
+    margin-right: 20px;
+    padding: 1px 20px;
+}
+.mao-page span{
+    margin-right: 20px;
+    float: right;
+}
+
+
+/*弹框*/
+.mao-pop-zzc, .mao-box-zzc{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+}
+.mao-pop-point, .mao-box-point{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+}
+.mao-pop{
+    width: 300px;
+    height: 200px;
+    position: absolute;
+    top: -100px;
+    left: -150px;
+    z-index: 1001;
+}
+.mao-box{
+    width: 600px;
+    height: 500px;
+    position: absolute;
+    top: -250px;
+    left: -300px;
+    z-index: 1001;
+}
+.mao-tips{
+    height: 30px;
+    width: 300px;
+    text-align: center;
+    line-height: 30px;
+    position: absolute;
+    top: 0;
+    left: -150px;
+}
+.mao-tips span{
+    border-radius: 4px;
+    padding: 4px 12px;
+    font-size: 16px;
+    letter-spacing: 1px;
+}
+.mao-pop-title, .mao-box-title{
+    height: 30px;
+    padding-left: 10px;
+    line-height: 30px;
+}
+.mao-pop-title i, .mao-box-title i{
+    font-size: 15px;
+    margin-right: 5px;
+}
+.mao-box .mao-box-close{
+    float: right;
+    font-size: 24px;
+    margin-top: 3px;
+    margin-right: 15px;
+    cursor: pointer;
+    transition: all .3s;
+}
+.mao-box .mao-box-close:hover{
+    transform: rotate(180deg);
+}
+.mao-pop-content{
+    height: 120px;
+    padding: 0 10px;
+}
+.mao-box-content{
+    height: 420px;
+    padding: 0 10px;
+    overflow-y: scroll;
+}
+.mao-pop-content p{
+    text-indent: 25px;
+    margin: 0;
+    padding: 20px 0;
+    font-size: 15px;
+    letter-spacing: 1px;
+}
+.mao-pop-bottom, .mao-box-bottom{
+    height: 50px;
+    padding-top: 10px;
+    text-align: right;
+}
+.mao-pop-bottom button, .mao-box-bottom button{
+    margin-right: 10px;
+    padding: 2px 15px;
 }

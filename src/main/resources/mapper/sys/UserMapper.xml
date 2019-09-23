@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mao.mapper.sys.UserMapper">
+
+    <select id="getUserByLogin" resultType="com.mao.entity.sys.User">
+        SELECT user_name,user_login,user_pass,locked FROM sys_user
+        WHERE user_login = #{login}
+    </select>
+    
+    <select id="getUser" resultType="com.mao.entity.sys.User">
+        SELECT a.`id`,a.`user_name`,a.`user_login`,a.`locked`,a.`user_role`,b.name AS role_name
+        FROM sys_user AS a
+        LEFT JOIN sys_role AS b ON a.user_role = b.`id`
+        WHERE a.`id` > 0
+        <if test="name != null">
+            AND LOCATE(#{name},a.`user_name`) > 0
+        </if>
+        <if test="login != null">
+            AND LOCATE(#{login},a.`user_login`) > 0
+        </if>
+        <if test="role > 0">
+            AND a.`user_role` = #{role}
+        </if>
+        LIMIT #{page},10
+    </select>
+    
+    <select id="getUserById" parameterType="java.lang.Integer" resultType="com.mao.entity.sys.User">
+        SELECT a.`id`,a.`user_name`,a.`user_login`,a.`locked`,a.`user_role`,b.name AS role_name,
+        a.company,a.dept,a.note,a.image,a.identity_code,a.address,a.qq,a.wx,a.phone,a.email
+        FROM sys_user AS a
+        LEFT JOIN sys_role AS b ON a.user_role = b.`id`
+        WHERE a.`id` = #{id}
+    </select>
+    
+    <select id="getUserCount" resultType="java.lang.Integer">
+        SELECT COUNT(a.`id`)
+        FROM sys_user AS a
+        LEFT JOIN sys_role AS b ON a.user_role = b.`id`
+        WHERE a.`id` > 0
+        <if test="name != null">
+            AND LOCATE(#{name},a.`user_name`) > 0
+        </if>
+        <if test="login != null">
+            AND LOCATE(#{login},a.`user_login`) > 0
+        </if>
+        <if test="role > 0">
+            AND a.`user_role` = #{role}
+        </if>
+    </select>
+
+    <insert id="saveUser" useGeneratedKeys="true" keyProperty="id"
+            parameterType="com.mao.entity.sys.User">
+        INSERT INTO sys_user(`user_name`,`user_login`,`user_pass`,`user_role`,
+        `company`,`dept`,`image`,`identity_code`,`address`,`qq`,`wx`,`phone`,`email`)
+        VALUES(#{user_name},#{user_login},#{user_pass},#{user_role},#{company},#{dept},
+        #{image},#{identity_code},#{address},#{qq},#{wx},#{phone},#{email})
+    </insert>
+    
+    <update id="updateUser" parameterType="com.mao.entity.sys.User">
+        UPDATE sys_user SET `user_name` = #{user_name},`user_login` = #{user_login},
+        `user_role` = #{user_role},`company` = #{company},`dept` = #{dept},`image` = #{image},
+        `identity_code` = #{identity_code},`address` = #{address},`qq` = #{qq},`wx` = #{wx},
+        `phone` = #{phone},`email` = #{email} WHERE `id` = #{id}
+    </update>
+
+</mapper>

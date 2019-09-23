@@ -33,7 +33,7 @@ public class BaseController implements ErrorController {
 
     //系统管理：用户管理页面
     @GetMapping("sys/user")
-    @RequiresPermissions("sys/user")
+    //@RequiresPermissions("sys/user")
     public String sys_user(){
         return "sys/user";
     }

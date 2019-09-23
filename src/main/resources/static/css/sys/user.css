@@ -1,0 +1,97 @@
+.user-intro-title{
+    height: 100px;
+    padding: 20px 0;
+    border-bottom: 1px solid #444444;
+}
+.user-intro-img{
+    display: inline-block;
+    width: 140px;
+    height: 100px;
+    text-align: center;
+    vertical-align: top;
+}
+.user-intro-img img{
+    height: 100px;
+    width: 100px;
+    text-align: center;
+    border-radius: 50px;
+}
+.user-intro-names{
+    display: inline-block;
+    width: 400px;
+    height: 100px;
+    vertical-align: top;
+    padding-top: 30px;
+    padding-left: 20px;
+}
+.user-intro-names-item{
+    height: 30px;
+    line-height: 30px;
+}
+.user-intro-name{
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+.user-intro-company{
+    font-size: 15px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+.user-intro-role, .user-intro-dept{
+    font-size: 15px;
+}
+.user-ss{
+    padding: 10px 0;
+}
+.user-ss span{
+    color: #c8c191;
+    font-size: 15px;
+    font-weight: bold;
+}
+.user-ss i{
+    color: #c6ac3b;
+    font-size: 16px;
+    padding-right: 5px;
+}
+.user-ss p{
+    text-indent: 25px;
+}
+#user-intro, #user-edit, #loading{
+    display: none;
+}
+.user-intro-error{
+    text-align: center;
+    margin-top: 20px;
+}
+
+/*新建、更新弹框*/
+#user-edit .mao-box-content{
+    padding: 0 10px;
+}
+#user-edit .mao-box-content table{
+    width: 98%;
+    margin: 20px 0;
+}
+#user-edit .mao-box-content tr{
+    height: 36px;
+    line-height: 36px;
+    width: 100%;
+}
+#user-edit .mao-box-content .edit-name{
+    width: 15%;
+    text-align: center;
+}
+#user-edit .mao-box-content .edit-input{
+    width: 45%;
+    color: #c6ac3b;
+}
+#user-edit .mao-box-content .edit-input input,
+#user-edit .mao-box-content .edit-input select{
+    padding-left: 10px;
+    background-color: #777777;
+}
+#user-edit .mao-box-content .edit-error{
+    width: 40%;
+    color: #ea9693;
+}

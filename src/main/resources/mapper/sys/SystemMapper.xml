@@ -16,10 +16,19 @@
         LEFT JOIN sys_role_permission_ref AS b ON a.`id` = b.`per_id`
         WHERE b.`role_id` = #{id}
     </select>
+    
+    <select id="getRoles" resultType="com.mao.entity.sys.Role">
+        SELECT `id`,`name`,`intro` FROM sys_role
+    </select>
 
-    <select id="getUserByLogin" resultType="com.mao.entity.sys.User">
-        SELECT user_name,user_login,user_pass,locked FROM sys_user
-        WHERE user_login = #{login}
+    <insert id="saveRole" useGeneratedKeys="true" keyProperty="id"
+            parameterType="com.mao.entity.sys.Role">
+        INSERT INTO sys_role(`name`,`intro`)
+        VALUES(#{name},#{intro})
+    </insert>
+    
+    <select id="getPermissions" resultType="com.mao.entity.sys.Permission">
+        SELECT `id`,`url`,`intro` FROM sys_permission
     </select>
 
 </mapper>

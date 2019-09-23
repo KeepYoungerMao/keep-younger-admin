@@ -3,14 +3,25 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <title></title>
+    <title>LOGIN</title>
+    <link rel="stylesheet" th:href="@{/static/font-awesome-4.7.0/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/static/css/login.css}">
 </head>
 
 <body>
-<div id="login">
-    <label for="name">用户名：</label><input id="name" type="text" name="u">
-    <label for="pass">密码：</label><input id="pass" type="text" name="p">
-    <button onclick="login()">登录</button>
+
+<div class="point">
+    <div class="login-box">
+        <div id="login">
+            <i class="fa fa-dot-circle-o"></i><br>
+            <!--<label for="name">用户名：</label>-->
+            <input id="name" type="text" name="u" placeholder="用户名"><br>
+            <!--<label for="pass">密码：</label>-->
+            <input id="pass" type="password" name="p" placeholder="密码"><br>
+            <div id="err">用户密码错误</div>
+            <button onclick="login()">登录</button>
+        </div>
+    </div>
 </div>
 </body>
 <script th:src="@{/static/js/jquery-1-11-3.js}"></script>
@@ -18,14 +29,30 @@
     function login() {
         var u = $("#name").val();
         var p = $("#pass").val();
-        $.ajax({
-            url:'login',
-            type:'post',
-            data:{"u":u,"p":p},
-            success:function (data) {
-                console.log(data);
-            }
-        });
+        if (u && p){
+            $.ajax({
+                url:'login',
+                type:'post',
+                data:{"u":u,"p":p},
+                success:function (data) {
+                    if(data.code == 200){
+                        $("#err").html("登陆成功");
+                        setTimeout(function () {
+                            window.location.href = "/";
+                        },500);
+                    } else {
+                        $("#err").css("visibility","visible").html(data.data.err_msg);
+                    }
+                }
+            });
+        }
+    }
+
+    document.onkeydown = function(e){
+        var ev = document.all ? window.event : e;
+        if(ev.keyCode==13) {
+            login();
+        }
     }
 </script>
 </html>

@@ -1,0 +1,71 @@
+body{
+    /*background-color: #333333;*/
+    color: #f4f4f4;
+    background: radial-gradient(circle at 10px 10px, #000000, #444444);
+}
+.point{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 10;
+}
+.login-box{
+    position: absolute;
+    top: -225px;
+    left: -225px;
+    z-index: 10;
+    display: block;
+    border-radius: 50%;
+    height: 450px;
+    width: 450px;
+    margin: 0;
+    background: radial-gradient(circle at 100px 100px, #b2b4ba, #000);
+}
+#login{
+    padding-top: 130px;
+    text-align: center;
+}
+#login i{
+    font-size: 100px;
+    color: #666666;
+    padding-bottom: 10px;
+}
+label{
+    width: 80px;
+    /*border-bottom: 1px solid #555555;*/
+}
+input{
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #999999;
+    color: #f4f4f4;
+    padding-left: 15px;
+}
+label,input,button{
+    display: inline-block;
+    height: 30px;
+    margin-top: 10px;
+    outline: none;
+}
+button{
+    width: 100px;
+    margin-top: 20px;
+    background-color: #888888;
+    border: 1px solid #555555;
+    color: #f4f4f4;
+    border-radius: 4px;
+    cursor: pointer;
+}
+button:hover{
+    background-color: #aaaaaa;
+    color: #ffffff;
+    border: 1px solid #555555;
+}
+#err{
+    margin-top: 10px;
+    color: #a88791;
+    visibility: hidden;
+}
+input::-webkit-input-placeholder{
+    color:#aaaaaa;
+}
