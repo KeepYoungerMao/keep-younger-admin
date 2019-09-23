@@ -9,7 +9,7 @@ var _login = null;
 
 $(function () {
     //加载角色选择列表
-    $.ajax({
+    jqxhr = $.ajax({
         url: '/v/sys/role',
         type: 'GET',
         success: function (data) {
@@ -35,7 +35,7 @@ $(function () {
  * @param login 登录名关键字
  */
 function count(role,name,login) {
-    $.ajax({
+    jqxhr = $.ajax({
         url: '/v/sys/users',
         type: 'GET',
         data:{'role':role,'name':name,'login':login},
@@ -57,7 +57,7 @@ function count(role,name,login) {
  * @param login 登录名关键字
  */
 function list(role,name,login) {
-    $.ajax({
+    jqxhr = $.ajax({
         url: '/v/sys/user',
         type: 'GET',
         data:{'role':role,'name':name,'login':login,'page':page},
@@ -181,7 +181,7 @@ function intro(id) {
     $(intro).find(".mao-box-content").empty();
     //加载loading
     //请求数据
-    $.ajax({
+    jqxhr = $.ajax({
         url: '/v/sys/user/'+id,
         type: 'get',
         success: function (data) {
@@ -290,7 +290,7 @@ function update(id) {
         tips("unknown this id : "+id);
     else
     //查询数据
-    $.ajax({
+    jqxhr = $.ajax({
         url: '/v/sys/user/' + id,
         type: 'get',
         success: function (data) {
@@ -346,7 +346,7 @@ function update_save_do() {
             //更新操作(pass 不操作)
             user = new User(id,user_name,user_login,'',user_role,company,dept,
             image,identity_code,address,qq,wx,phone,email);
-            $.ajax({
+            jqxhr = $.ajax({
                 url: '/v/sys/user',
                 type: 'POST',
                 data: JSON.stringify(user),
@@ -369,7 +369,7 @@ function update_save_do() {
             //保存操作
             user = new User(0,user_name,user_login,user_pass,user_role,company,dept,
                 image,identity_code,address,qq,wx,phone,email);
-            $.ajax({
+            jqxhr = $.ajax({
                 url: '/v/sys/user',
                 type: 'PUT',
                 data: JSON.stringify(user),
