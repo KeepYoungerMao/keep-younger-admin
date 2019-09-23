@@ -22,8 +22,7 @@
             <label for="role">角色：</label>
             <select id="role">
                 <option value="0">全部</option>
-                <option value="1">admin</option>
-                <option value="2">developer</option>
+                <!-- ajax load -->
             </select>
             <label for="name">用户名：</label>
             <input type="text" id="name">
@@ -33,7 +32,10 @@
                 <i class="fa fa-search"></i><span>检索</span>
             </button>
             <button class="green" onclick="save()">
-                <i class="fa fa-plus-square-o"></i><span>新增</span>
+                <i class="fa fa-plus"></i><span>新增</span>
+            </button>
+            <button class="green" onclick="flush()">
+                <i class="fa fa-refresh"></i><span>刷新</span>
             </button>
         </div>
         <div class="mao-data">
@@ -51,6 +53,8 @@
         <div class="mao-page">
             <button onclick="pre_page()">上一页</button>
             <button onclick="next_page()">下一页</button>
+            <label for="to_page"></label><input type="number" id="to_page">
+            <button onclick="to_page()"><i class="fa fa-mail-forward"></i></button>
             <span>
                 当前页：<b id="current_page">1</b>&nbsp;&nbsp;&nbsp;|&nbsp;
                 总页数：<b id="total_page">1</b>
@@ -125,7 +129,7 @@
                             <td class="edit-name"><label for="user_role">角色：</label></td>
                             <td class="edit-input">
                                 <select id="user_role">
-                                    <option value="1">admin</option>
+                                    <!-- ajax load -->
                                 </select>
                             </td>
                             <td class="edit-error"></td>
@@ -205,7 +209,7 @@
                     </table>
                 </div>
                 <div class="mao-box-bottom">
-                    <button class="clear" onclick="clear()">清空</button>
+                    <button class="clear" onclick="data_clear()">清空</button>
                     <button class="yes" onclick="update_save_do()">保存</button>
                     <button class="cancel" onclick="edit_close()">关闭</button>
                 </div>

@@ -197,6 +197,7 @@ button{
     padding-left: 5px;
 }
 .mao-data{
+    min-height: 310px;
     margin-top: 10px;
     font-size: 14px;
 }
@@ -213,7 +214,7 @@ button{
     border-radius: 4px;
 }
 .mao-page{
-    margin-top: 20px;
+    margin: 20px 0;
     text-align: center;
     height: 30px;
     line-height: 30px;
@@ -225,6 +226,10 @@ button{
 .mao-page span{
     margin-right: 20px;
     float: right;
+}
+.mao-page input{
+    width: 30px;
+    height: 22px;
 }
 
 
@@ -269,7 +274,7 @@ button{
 }
 .mao-tips span{
     border-radius: 4px;
-    padding: 4px 12px;
+    padding: 10px 24px;
     font-size: 16px;
     letter-spacing: 1px;
 }
@@ -317,4 +322,5 @@ button{
 .mao-pop-bottom button, .mao-box-bottom button{
     margin-right: 10px;
     padding: 2px 15px;
+    cursor: pointer;
 }

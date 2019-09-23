@@ -85,7 +85,7 @@ function tips(msg,wait) {
             '</div>';
     $(".super").append(tips);
     if(wait == null || wait == undefined || wait <= 0)
-        wait = 1500;
+        wait = 1000;
     setTimeout(function () {
         pop_off();
     },wait);

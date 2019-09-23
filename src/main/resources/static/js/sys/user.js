@@ -8,7 +8,24 @@ var _name = null;
 var _login = null;
 
 $(function () {
-    search();
+    //加载角色选择列表
+    $.ajax({
+        url: '/v/sys/role',
+        type: 'GET',
+        success: function (data) {
+            if(data.code == 200){
+                //加载数据
+                var roles = data.data;
+                for(var i=0; i < roles.length; i++){
+                    var _option = '<option value="'+roles[i].id+'">'+roles[i].name+'</option>';
+                    $("#role").append(_option);
+                    $("#user_role").append(_option);
+                }
+                //加载数据列表
+                search();
+            }
+        }
+    });
 });
 
 /**
@@ -106,6 +123,20 @@ function next_page() {
     }else{
         page ++;
         list(_role,_name,_login);
+    }
+}
+
+/**
+ * 跳转到某一页
+ */
+function to_page() {
+    var to_page = $("#to_page").val();
+    if(undefined != to_page && null != to_page && '' != to_page){
+        to_page = parseInt(to_page);
+        if(to_page > 0 && to_page <= total){
+            page = to_page;
+            list(_role,_name,_login);
+        }
     }
 }
 
@@ -239,7 +270,7 @@ function edit_close() {
  * 新增时候的编辑框打开
  */
 function save() {
-    clear();
+    data_clear();
     //密码编辑框显示
     $("#user_pass").parent().parent().show();
     //清空id
@@ -366,12 +397,25 @@ function update_save_do() {
 /**
  * 清空
  */
-function clear() {
+function data_clear() {
     //除id之外清空，
     var _id = $("#id");
+    var box = $("#user-edit");
     var id = $(_id).val();
-    $("#user-edit").find("input").val('');
+    $(box).find("input").val('');
+    $(box).find("textarea").val('');
     $(_id).val(id);
+}
+
+/**
+ * 刷新主界面列表
+ * 清除关键字数据
+ */
+function flush() {
+    document.getElementById("role").options[0].selected = true;
+    $("#name").val('');
+    $("#login").val('');
+    search();
 }
 
 /**

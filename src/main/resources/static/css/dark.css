@@ -30,6 +30,7 @@
 /* 头部 */
 .dark .mao-header{
     border-bottom: 1px solid #999;
+    background-color: #333333;
 }
 
 /* 左边 */
@@ -101,6 +102,14 @@
     background-color: #555555;
     border: 1px solid #333333;
 }
+.mao-page input{
+    background-color: #333333;
+    border: 1px solid #666666;
+}
+.mao-page input:hover,.mao-page input:focus,.mao-page input:active{
+    background-color: #333333;
+    border: 1px solid #888888;
+}
 
 
 /*弹框*/
@@ -128,8 +137,8 @@
     border-bottom: 1px solid #444444;
 }
 .dark .mao-pop-bottom .clear, .dark .mao-box-bottom .clear{
-    background-color: #f3be20;
-    border: 1px solid #f3be20;
+    background-color: #917214;
+    border: 1px solid #856812;
 }
 .dark .mao-pop-bottom .clear:hover, .dark .mao-box-bottom .clear:hover{
     background-color: #bd8f1c;
