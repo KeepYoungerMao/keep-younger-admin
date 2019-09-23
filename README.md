@@ -1,5 +1,9 @@
 # keep-younger-admin
-a admin system for keep-younger
+一个简单的后台管理系统 \
+
+主要使用： \
+
+spring、spring boot、mybatis、thymeleaf、shiro
 
 *** 
 
@@ -62,7 +66,7 @@ ajax请求默认不支持重定向。ajax请求是局部刷新，不会重新刷
             response.setHeader("REDIRECT", "REDIRECT");
             
             //告诉ajax我重定向的路径
-            response.setHeader("CONTENTPATH", basePath+"/unAuth");
+            response.setHeader("CONTENT-PATH", basePath+"/unAuth");
             
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
             
@@ -88,13 +92,12 @@ ajax请求默认不支持重定向。ajax请求是局部刷新，不会重新刷
                }
                
                //将后端重定向的地址取出来,使用win.location.href去实现重定向的要求
-               win.location.href = jqxhr.getResponseHeader("CONTENTPATH");
+               win.location.href = jqxhr.getResponseHeader("CONTENT-PATH");
            }
            
        }
     });
-3.前端ajax使用： \
-每次使用ajax请求，让他的返回值为jqxhr。如：
+3.前端ajax使用：每次使用ajax请求，让他的返回值为jqxhr。如：
 
     var jqxhr = $.ajax({
         
