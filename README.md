@@ -1,7 +1,7 @@
 # keep-younger-admin
-一个简单的后台管理系统 \
+一个简单的后台管理系统。
 
-主要使用： \
+主要使用：
 
 spring、spring boot、mybatis、thymeleaf、shiro
 
