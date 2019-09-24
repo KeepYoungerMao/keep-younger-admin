@@ -9,6 +9,7 @@ import com.mao.mapper.sys.SystemMapper;
 import com.mao.mapper.sys.UserMapper;
 import com.mao.service.BaseService;
 import com.mao.service.sys.LoginService;
+import com.mao.service.sys.SystemService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,9 @@ public class LoginServiceImpl extends BaseService implements LoginService {
     private UserMapper userMapper;
 
     @Resource
+    private SystemService systemService;
+
+    @Resource
     private Config config;
 
     @Override
@@ -40,9 +44,7 @@ public class LoginServiceImpl extends BaseService implements LoginService {
         UsernamePasswordToken token = new UsernamePasswordToken(u,p,r);
         try {
             subject.login(token);
-            User user = getUserByLogin(u);
-            user.setUser_pass("");  //去除密码
-            return ok(user);
+            return systemService.getUser(u);
         } catch (IncorrectCredentialsException e){
             return permission("密码错误");
         }catch (UnknownAccountException e){

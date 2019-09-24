@@ -35,4 +35,7 @@ public interface UserMapper {
     //更新一个用户数据
     void updateUser(User user);
 
+    //根据登录名查询用户信息
+    User getUserIntroByLogin(@Param("login") String login);
+
 }

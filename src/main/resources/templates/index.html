@@ -10,7 +10,7 @@
 </head>
 <script th:src="@{/static/js/jquery-1-11-3.js}"></script>
 <body>
-    <div class="dark">
+    <div class="super dark">
         <div th:replace="common/header::header"></div><!-- header -->
         <div th:replace="common/side::side"></div><!-- side -->
         <div class="mao-body">
@@ -18,5 +18,7 @@
         </div>
     </div>
 </body>
-
+<script th:src="@{/static/js/util/ajax-redirect.js}"></script>
+<script th:src="@{/static/js/util/pop.js}"></script>
+<script th:src="@{/static/js/header.js}"></script>
 </html>

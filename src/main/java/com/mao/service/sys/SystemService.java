@@ -33,4 +33,7 @@ public interface SystemService {
 
     //更新一个用户数据
     ResponseData updateUser(User user);
+
+    //根据登录名查询用户信息
+    ResponseData getUser(String login);
 }

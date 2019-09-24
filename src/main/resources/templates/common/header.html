@@ -10,8 +10,24 @@
 
 <div class="mao-header" th:fragment="header">
 
+    <div id="user-note-title" class="user-note-title" title="点击设置" onclick="note_set()">
+        <span>今日说说：</span><br>
+    </div>
+    <div id="user-function" class="user-function"></div>
+    <div id="sys-function-zzc" class="mao-box-zzc" onclick="sys_function_cancel()">
+        <div id="sys-function">
+            <div>
+                <a href="javascript:trans_user_image()">更换头像</a>
+            </div>
+            <div>
+                <a href="javascript:void(0)">BUG反馈</a>
+            </div>
+            <div>
+                <a href="javascript:logout()">退出登录</a>
+            </div>
+        </div>
+    </div>
 </div>
-
 </body>
 
 </html>

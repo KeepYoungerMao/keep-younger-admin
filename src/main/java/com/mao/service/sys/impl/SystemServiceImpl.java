@@ -176,4 +176,15 @@ public class SystemServiceImpl extends BaseService implements SystemService {
             return "user email id not right";
         return null;
     }
+
+    /**
+     * 获取当前登录的用户信息
+     * @param login 登录名
+     * @return 用户信息
+     */
+    @Override
+    public ResponseData getUser(String login) {
+        User user = userMapper.getUserIntroByLogin(login);
+        return ok(user);
+    }
 }

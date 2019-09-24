@@ -36,8 +36,9 @@
                 data:{"u":u,"p":p},
                 success:function (data) {
                     if(data.code == 200){
-                        $("#err").html("登陆成功");
+                        $("#err").css("visibility","visible").html("登陆成功");
                         setTimeout(function () {
+                            sessionStorage.setItem("user",JSON.stringify(data.data));
                             window.location.href = "/";
                         },500);
                     } else {
