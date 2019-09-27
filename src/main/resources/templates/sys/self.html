@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>个人资料管理</title>
+    <link rel="stylesheet" th:href="@{/static/css/common.css}">
+    <link rel="stylesheet" th:href="@{/static/css/dark.css}">
+    <link rel="stylesheet" th:href="@{/static/font-awesome-4.7.0/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/static/css/sys/self.css}">
+</head>
+<script th:src="@{/static/js/jquery-1-11-3.js}"></script>
+<body>
+<div class="super dark">
+    <div th:replace="common/header::header"></div><!-- header -->
+    <div th:replace="common/side::side"></div><!-- side -->
+    <div class="mao-body">
+        <div class="mao-sign">
+            <span>系统管理</span><span>/</span><span>个人资料管理</span>
+        </div>
+        <div class="mao-data">
+            <table id="self-data" border="0" cellspacing="0" cellpadding="0" width="98%">
+                <tr>
+                    <td class="self-main">
+                        <div class="self-name-box">
+                            <span id="self-name" class="self-name"></span>
+                        </div>
+                        <div>
+                            <span class="self-title-item">状态：</span>
+                            <span id="self-locked" class=""></span>
+                        </div>
+                        <div>
+                            <span class="self-title-item">角色：</span>
+                            <span id="self-role"></span>
+                        </div>
+                        <div>
+                            <span class="self-title-item">部门：</span>
+                            <span id="self-dept"></span>
+                        </div>
+                        <div>
+                            <span class="self-title-item">公司：</span>
+                            <span id="self-company"></span>
+                        </div>
+                    </td>
+                    <td>
+                        <div style="padding-left: 160px">
+                            <img id="self-image" src="" alt="更换头像">
+                            <br>
+                            <input id="self-image-file" type="file"
+                                   onchange="changImg(event,'self-image')"
+                                   accept="image/gif,image/jpeg,image/jpg,image/png,image/svg">
+                            <button id="self-image-save" onclick="self_edit_image()">保存</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="self-intro-item">
+                            <label class="self-title-item self-item" for="self-login">登录名:</label>
+                            <input id="self-login" class="self-edit" type="text" disabled="disabled">
+                            <i class="fa fa-pencil-square-o" onclick="self_edit($('#self-login'))"></i>
+                            <button class="self-edit-yes"
+                                    onclick="self_edit_save($('#self-login'),'user_login')">保存</button>
+                            <button class="self-edit-cancel"
+                                    onclick="self_edit_cancel($('#self-login'))">取消</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="self-intro-item">
+                            <label class="self-title-item self-item" for="self-note">便签:</label>
+                            <textarea id="self-note" class="self-edit" disabled="disabled"></textarea>
+                            <i class="fa fa-pencil-square-o" onclick="self_edit($('#self-note'))"></i>
+                            <button class="self-edit-yes"
+                                    onclick="self_edit_save($('#self-note'),'note')">保存</button>
+                            <button class="self-edit-cancel"
+                                    onclick="self_edit_cancel($('#self-note'))">取消</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="self-intro-item">
+                            <span class="self-title-item self-item">身份证号:</span>
+                            <span id="self-id-card"></span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="self-intro-item">
+                            <label class="self-title-item self-item" for="self-address">现住地址:</label>
+                            <textarea id="self-address" class="self-edit" disabled="disabled"></textarea>
+                            <i class="fa fa-pencil-square-o" onclick="self_edit($('#self-address'))"></i>
+                            <button class="self-edit-yes"
+                                    onclick="self_edit_save($('#self-address'),'address')">保存</button>
+                            <button class="self-edit-cancel"
+                                    onclick="self_edit_cancel($('#self-address'))">取消</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="self-intro-item">
+                            <label class="self-title-item self-item" for="self-phone">手机号:</label>
+                            <input id="self-phone" class="self-edit" type="text" disabled="disabled">
+                            <i class="fa fa-pencil-square-o" onclick="self_edit($('#self-phone'))"></i>
+                            <button class="self-edit-yes"
+                                    onclick="self_edit_save($('#self-phone'),'phone')">保存</button>
+                            <button class="self-edit-cancel"
+                                    onclick="self_edit_cancel($('#self-phone'))">取消</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="self-intro-item">
+                            <label class="self-title-item self-item" for="self-email">邮箱地址:</label>
+                            <input id="self-email" class="self-edit" type="text" disabled="disabled">
+                            <i class="fa fa-pencil-square-o" onclick="self_edit($('#self-email'))"></i>
+                            <button class="self-edit-yes"
+                                    onclick="self_edit_save($('#self-email'),'email')">保存</button>
+                            <button class="self-edit-cancel"
+                                    onclick="self_edit_cancel($('#self-email'))">取消</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="self-intro-item">
+                            <label class="self-title-item self-item" for="self-qq">QQ号码:</label>
+                            <input id="self-qq" class="self-edit" type="text" disabled="disabled">
+                            <i class="fa fa-pencil-square-o" onclick="self_edit($('#self-qq'))"></i>
+                            <button class="self-edit-yes"
+                                    onclick="self_edit_save($('#self-qq'),'qq')">保存</button>
+                            <button class="self-edit-cancel"
+                                    onclick="self_edit_cancel($('#self-qq'))">取消</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="self-intro-item">
+                            <label class="self-title-item self-item" for="self-wx">微信号:</label>
+                            <input id="self-wx" class="self-edit" type="text" disabled="disabled">
+                            <i class="fa fa-pencil-square-o" onclick="self_edit($('#self-wx'))"></i>
+                            <button class="self-edit-yes"
+                                    onclick="self_edit_save($('#self-wx'),'wx')">保存</button>
+                            <button class="self-edit-cancel"
+                                    onclick="self_edit_cancel($('#self-wx'))">取消</button>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="mao-page">
+            <!--<button class="yes" onclick="">保存更改</button>-->
+        </div>
+    </div>
+</div>
+</body>
+<script th:src="@{/static/js/util/ajax-redirect.js}"></script>
+<script th:src="@{/static/js/util/pop.js}"></script>
+<script th:src="@{/static/js/header.js}"></script>
+<script th:src="@{/static/js/sys/self.js}"></script>
+</html>

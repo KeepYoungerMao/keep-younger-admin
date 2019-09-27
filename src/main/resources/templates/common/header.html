@@ -17,7 +17,7 @@
     <div id="sys-function-zzc" class="mao-box-zzc" onclick="sys_function_cancel()">
         <div id="sys-function">
             <div>
-                <a href="javascript:trans_user_image()">更换头像</a>
+                <a href="javascript:trans_user_intro()">个人资料</a>
             </div>
             <div>
                 <a href="javascript:void(0)">BUG反馈</a>
@@ -27,6 +27,28 @@
             </div>
         </div>
     </div>
+
+    <!-- user note edit box -->
+    <div id="user-note-edit" class="mao-box-zzc" style="display: none">
+        <div class="mao-box-point">
+            <div class="mao-box mao-s-box">
+                <div class="mao-box-title">
+                    <i class="fa fa-commenting warn"></i>
+                    <span>用户便签修改</span>
+                    <i class="fa fa-times mao-box-close" onclick="user_note_close()"></i>
+                </div>
+                <div class="mao-box-content mao-s-box-content" style="font-size: 15px;">
+                    <label for="user-note-data">新的便签：</label><br><br>
+                    <textarea id="user-note-data" style="height: 100px;width: 560px;"></textarea>
+                </div>
+                <div class="mao-box-bottom">
+                    <button class="yes" onclick="user_note_update()">保存</button>
+                    <button class="cancel" onclick="user_note_close()">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 </body>
 

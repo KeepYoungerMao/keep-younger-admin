@@ -322,6 +322,9 @@ button{
     left: -300px;
     z-index: 1001;
 }
+.mao-s-box{
+    height: 240px;
+}
 .mao-tips{
     height: 30px;
     width: 300px;
@@ -365,6 +368,9 @@ button{
     height: 420px;
     padding: 0 10px;
     overflow-y: scroll;
+}
+.mao-s-box-content{
+    height: 160px;
 }
 .mao-pop-content p{
     text-indent: 25px;

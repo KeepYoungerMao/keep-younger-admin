@@ -36,4 +36,10 @@ public interface SystemService {
 
     //根据登录名查询用户信息
     ResponseData getUser(String login);
+
+    //更新用户便签
+    ResponseData updateUserNote(Integer id, String note);
+
+    //用户自己更新自己的数据
+    ResponseData updateUserBySelf(User user);
 }

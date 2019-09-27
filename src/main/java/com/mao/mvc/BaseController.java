@@ -45,4 +45,11 @@ public class BaseController implements ErrorController {
         return "sys/permission";
     }
 
+    //系统管理：个人资料管理页面
+    @GetMapping("sys/self")
+    @RequiresPermissions("sys_self_page")
+    public String sys_self(){
+        return "sys/self";
+    }
+
 }

@@ -187,4 +187,97 @@ public class SystemServiceImpl extends BaseService implements SystemService {
         User user = userMapper.getUserIntroByLogin(login);
         return ok(user);
     }
+
+    /**
+     * 更新用户便签
+     * @param id 用户id
+     * @param note 便签数据
+     * @return 成功 / 失败
+     */
+    @Override
+    public ResponseData updateUserNote(Integer id, String note) {
+        if (null == id)
+            return bad("loss param id");
+        if (id <= 0)
+            return bad("param id cannot be " + id);
+        if (!SU.isRightString(note,1,100)){
+            return bad("invalid param note");
+        }
+        int count = userMapper.updateUserNoteById(id,note);
+        return count > 0 ? ok("update success") :
+                bad("cannot find user by id: " + id);
+    }
+
+    /**
+     * 用户自己更新自己的数据
+     * @param user 用户数据
+     * @return 成功 / 失败
+     */
+    @Override
+    public ResponseData updateUserBySelf(User user) {
+        if (user.getId() <= 0)
+            return bad("loss param id");
+        User _user = new User();
+        _user.setId(user.getId());
+        boolean flag = false;
+        //登录名
+        if (SU.isNotEmpty(user.getUser_login())){
+            if (SU.isRightString(user.getUser_login(),4,16)){
+                _user.setUser_login(user.getUser_login());
+                flag = true;
+            } else {
+                return bad("invalid param user_login:"+user.getUser_login());
+            }
+        } else if (SU.isNotEmpty(user.getNote())){
+            if (SU.isRightString(user.getNote(),1,100)){
+                _user.setNote(user.getNote());
+                flag = true;
+            } else {
+                return bad("invalid param note: "+user.getNote());
+            }
+        } else if (SU.isNotEmpty(user.getAddress())){
+            if (SU.isRightString(user.getAddress(),1,50)){
+                _user.setAddress(user.getAddress());
+                flag = true;
+            } else {
+                return bad("invalid param address: "+user.getAddress());
+            }
+        } else if (SU.isNotEmpty(user.getPhone())){
+            if (SU.isPhone(user.getPhone())){
+                _user.setPhone(user.getPhone());
+                flag = true;
+            } else {
+                return bad("invalid param phone: "+user.getPhone());
+            }
+        } else if (SU.isNotEmpty(user.getEmail())){
+            if (SU.isEmail(user.getEmail())){
+                _user.setEmail(user.getEmail());
+                flag = true;
+            } else {
+                return bad("invalid param email: "+user.getEmail());
+            }
+        } else if (SU.isNotEmpty(user.getQq())){
+            if (SU.isRightString(user.getQq(),4,16) && SU.isNumber(user.getQq())){
+                _user.setQq(user.getQq());
+                flag = true;
+            } else {
+                return bad("invalid param qq: "+user.getQq());
+            }
+        } else if (SU.isNotEmpty(user.getWx())){
+            if (SU.isRightString(user.getWx(),1,30)){
+                _user.setWx(user.getWx());
+                flag = true;
+            } else {
+                return bad("invalid param: "+user.getWx());
+            }
+        }
+        if (flag){
+            int count = userMapper.updateUserBySelf(_user);
+            return count > 0 ? ok("update success") :
+                    bad("cannot find user by id: " + user.getId());
+        } else {
+            return bad("cannot update anything because anything is null");
+        }
+    }
+
 }

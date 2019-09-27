@@ -111,4 +111,26 @@ public class SystemController {
         return systemService.updateUser(user);
     }
 
+    /**
+     * 用户自己更新自己的数据
+     * @param user 用户数据
+     * @return 成功 / 失败
+     */
+    @PostMapping("self")
+    @RequiresPermissions("sys_self_update")
+    public ResponseData updateUserBySelf(@RequestBody User user){
+        return systemService.updateUserBySelf(user);
+    }
+
+    /**
+     * 更新用户便签
+     * @param id 用户id
+     * @param note 便签数据
+     * @return 成功 / 失败
+     */
+    @PostMapping("self/note")
+    public ResponseData updateUserNote(Integer id, String note){
+        return systemService.updateUserNote(id,note);
+    }
+
 }
