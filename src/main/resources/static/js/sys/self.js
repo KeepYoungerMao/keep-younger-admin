@@ -147,12 +147,38 @@ function self_edit_image() {
  * 修改头像图片
  */
 function self_edit_image_do() {
-    console.log(12);
+    var fileObj = document.querySelector("#self-image-file").files[0];
+    console.log(fileObj);
+    var formData = new FormData();
+    formData.append("file",fileObj);
+    jqxhr = $.ajax({
+        url: '/v/sys/self/image',
+        type: 'post',
+        dataType: 'json',
+        data: formData,
+        async: false,
+        cache: false,
+        contentType: false,
+        processData: false,
+        headers: {"Accept":"*/*"},
+        success: function (data) {
+            if(data.code == 200){
+                console.log(data.data);
+                user.image = data.data;
+                sessionStorage.setItem("user",JSON.stringify(user));
+                pop("更换成功",1);
+            }else{
+                pop("更换头像失败：提示信息："+data.data.err_msg,1);
+            }
+        },
+        error: function () {
+            tips("网络错误。请稍后再试。");
+        }
+    });
     //保存之后的事：
     $("#self-image-file").val(null);
     $("#self-image").attr("src",user.image);
     $("#self-image-save").css("visibility","hidden");
-    tips("功能即将开放！");
 }
 
 /**

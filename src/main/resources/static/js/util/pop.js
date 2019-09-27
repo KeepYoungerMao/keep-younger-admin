@@ -23,6 +23,7 @@ function pop(msg,mode,fn) {
     }
 }
 function pop1(msg) {
+    pop_off();
     var pop = '<div class="mao-pop-zzc">'+
                 '<div class="mao-pop-point">'+
                     '<div class="mao-pop">'+
@@ -42,6 +43,7 @@ function pop1(msg) {
     $(".super").append(pop);
 }
 function pop2(msg,fn) {
+    pop_off();
     var pop = '<div class="mao-pop-zzc">'+
                 '<div class="mao-pop-point">'+
                     '<div class="mao-pop">'+

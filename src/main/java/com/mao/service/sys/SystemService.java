@@ -3,6 +3,7 @@ package com.mao.service.sys;
 import com.mao.entity.ResponseData;
 import com.mao.entity.sys.Role;
 import com.mao.entity.sys.User;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 系统部分业务处理
@@ -42,4 +43,7 @@ public interface SystemService {
 
     //用户自己更新自己的数据
     ResponseData updateUserBySelf(User user);
+
+    //更新用户头像
+    ResponseData updateUserImage(MultipartFile file);
 }

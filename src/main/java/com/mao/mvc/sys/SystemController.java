@@ -6,6 +6,7 @@ import com.mao.entity.sys.User;
 import com.mao.service.sys.SystemService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 
@@ -131,6 +132,16 @@ public class SystemController {
     @PostMapping("self/note")
     public ResponseData updateUserNote(Integer id, String note){
         return systemService.updateUserNote(id,note);
+    }
+
+    /**
+     * 更新用户头像
+     * @param file 头像图片
+     * @return 成功 / 失败
+     */
+    @PostMapping("self/image")
+    public ResponseData updateUserImage(@RequestParam("file") MultipartFile file){
+        return systemService.updateUserImage(file);
     }
 
 }

@@ -12,9 +12,13 @@ import com.mao.util.EnCryptUtil;
 import com.mao.util.SU;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * 系统部分业务处理
@@ -280,4 +284,29 @@ public class SystemServiceImpl extends BaseService implements SystemService {
         }
     }
 
+    /**
+     * 更新用户头像
+     * @param file 头像图片
+     * @return 成功 / 失败
+     */
+    @Override
+    public ResponseData updateUserImage(MultipartFile file) {
+        if (file.isEmpty() || file.getSize() <= 0)
+            return bad("image file is not found");
+        long MAX_FILE = 512000L;
+        if (file.getSize() > MAX_FILE)
+            return bad("image file is too large,max size is 500K");
+        String name = file.getOriginalFilename();
+        String name_fix = name.substring(name.lastIndexOf("."));
+        String new_name = UUID.randomUUID().toString();
+        String path = "C:\\Users\\zongx\\Desktop\\self\\";
+        File final_file = new File(path + new_name+name_fix);
+        try {
+            file.transferTo(final_file);
+            //TODO 保存至数据库
+            return ok("/image/"+new_name+name_fix);
+        } catch (IOException e) {
+            return bad("cannot save image file because of "+e.getMessage());
+        }
+    }
 }
