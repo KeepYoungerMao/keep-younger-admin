@@ -1,5 +1,6 @@
 package com.mao.service.sys.impl;
 
+import com.mao.config.Config;
 import com.mao.entity.ResponseData;
 import com.mao.entity.sys.Permission;
 import com.mao.entity.sys.Role;
@@ -18,7 +19,6 @@ import javax.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * 系统部分业务处理
@@ -32,6 +32,9 @@ public class SystemServiceImpl extends BaseService implements SystemService {
 
     @Resource
     private SystemMapper systemMapper;
+
+    @Resource
+    private Config config;
 
     /**
      * 获取所有角色列表
@@ -289,6 +292,7 @@ public class SystemServiceImpl extends BaseService implements SystemService {
      * @param file 头像图片
      * @return 成功 / 失败
      */
+    @Transactional
     @Override
     public ResponseData updateUserImage(MultipartFile file) {
         if (file.isEmpty() || file.getSize() <= 0)
@@ -298,13 +302,15 @@ public class SystemServiceImpl extends BaseService implements SystemService {
             return bad("image file is too large,max size is 500K");
         String name = file.getOriginalFilename();
         String name_fix = name.substring(name.lastIndexOf("."));
-        String new_name = UUID.randomUUID().toString();
-        String path = "C:\\Users\\zongx\\Desktop\\self\\";
-        File final_file = new File(path + new_name+name_fix);
+        String new_name = SU.getRandomString(32)+name_fix;
+        File final_file = new File(config.getLocationPath()+new_name);
         try {
             file.transferTo(final_file);
-            //TODO 保存至数据库
-            return ok("/image/"+new_name+name_fix);
+            String linkPath = config.getLinkPath()+new_name;
+            //保存至数据库
+            String login = (String) getSubject().getPrincipal();
+            userMapper.updateUserImageByLogin(linkPath,login);
+            return ok(linkPath);
         } catch (IOException e) {
             return bad("cannot save image file because of "+e.getMessage());
         }

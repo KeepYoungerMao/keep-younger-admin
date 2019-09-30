@@ -19,4 +19,16 @@ public class Config {
     @Value("${max-login-time}")
     private int maxLoginTime;
 
+    //图片上传最大bit值
+    @Value("${max-upload-image-size}")
+    private long maxImageSize;
+
+    //图片本地储存路径
+    @Value("${user-image-local-path}")
+    private String locationPath;
+
+    //图片访问路径
+    @Value("${user-image-link-pre}")
+    private String linkPath;
+
 }

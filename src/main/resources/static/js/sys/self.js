@@ -147,9 +147,10 @@ function self_edit_image() {
  * 修改头像图片
  */
 function self_edit_image_do() {
+    //找到图片input的文件对象
     var fileObj = document.querySelector("#self-image-file").files[0];
-    console.log(fileObj);
     var formData = new FormData();
+    //组合提交数据
     formData.append("file",fileObj);
     jqxhr = $.ajax({
         url: '/v/sys/self/image',
@@ -163,10 +164,10 @@ function self_edit_image_do() {
         headers: {"Accept":"*/*"},
         success: function (data) {
             if(data.code == 200){
-                console.log(data.data);
+                //保存成功，返回的是图片访问url，赋值给user，更新sessionStorage
                 user.image = data.data;
                 sessionStorage.setItem("user",JSON.stringify(user));
-                pop("更换成功",1);
+                tips("更换成功");
             }else{
                 pop("更换头像失败：提示信息："+data.data.err_msg,1);
             }
@@ -175,7 +176,7 @@ function self_edit_image_do() {
             tips("网络错误。请稍后再试。");
         }
     });
-    //保存之后的事：
+    //保存之后的事：清空图片input、显示新缓存的图片，隐藏保存按钮
     $("#self-image-file").val(null);
     $("#self-image").attr("src",user.image);
     $("#self-image-save").css("visibility","hidden");
@@ -189,10 +190,11 @@ function self_edit_image_do() {
  */
 function changImg(e,name) {
     if (e.target.files.length <= 0){
-        console.log(user.image);
+        //图片更改后没有选择图片，隐藏图片保存按钮
         $("#self-image").attr("src",user.image);
         $("#self-image-save").css("visibility","hidden");
     } else{
+        //更改了图片，图片保存按钮显现
         $("#self-image-save").css("visibility","visible");
         for (var i = 0; i < e.target.files.length; i++) {
             var file = e.target.files.item(i);
@@ -203,7 +205,7 @@ function changImg(e,name) {
             var freader = new FileReader();
             freader.readAsDataURL(file);
             freader.onload = function (e) {
-                console.log(e.target.result);
+                //回显
                 $("#"+ name).attr("src", e.target.result);
             }
         }

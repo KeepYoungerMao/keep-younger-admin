@@ -43,4 +43,6 @@ public interface UserMapper {
 
     //用户更新自己的个人资料
     int updateUserBySelf(User user);
+
+    int updateUserImageByLogin(@Param("image") String image, @Param("login") String login);
 }

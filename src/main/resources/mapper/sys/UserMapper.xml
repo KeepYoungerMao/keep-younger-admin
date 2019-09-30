@@ -101,5 +101,9 @@
         </if>
         WHERE `id` = #{id}
     </update>
+    
+    <update id="updateUserImageByLogin">
+        UPDATE sys_user SET `image` = #{image} WHERE `user_login` = #{login}
+    </update>
 
 </mapper>

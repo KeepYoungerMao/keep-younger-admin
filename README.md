@@ -108,3 +108,21 @@ ajax请求默认不支持重定向。ajax请求是局部刷新，不会重新刷
         }
         
     });
+
+*** 
+
+## Mapper.xml中返回值List<T>,当T为基本类型时的写法
+
+列表查询时，如返回值为`List<User>`，则SQL写法为：
+
+    <select id="getUser" resultType="com.mao.entity.User">
+        SELECT * FROM user
+    </select>
+    
+当返回值为`List<String>`接收值为基本类型时，则SQL写法为：
+
+    <select id="getUserName" resultType="Java.lang.String">
+        SELECT `name` FROM user
+    </select>
+    
+`List<Integer>`、`List<Double>`等如上一样。
