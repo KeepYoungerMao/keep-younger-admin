@@ -111,7 +111,7 @@ ajax请求默认不支持重定向。ajax请求是局部刷新，不会重新刷
 
 *** 
 
-## Mapper.xml中返回值List<T>,当T为基本类型时的写法
+## Mapper.xml中返回值`List<T>`,当T为基本类型时的写法
 
 列表查询时，如返回值为`List<User>`，则SQL写法为：
 
@@ -126,3 +126,22 @@ ajax请求默认不支持重定向。ajax请求是局部刷新，不会重新刷
     </select>
     
 `List<Integer>`、`List<Double>`等如上一样。
+
+***
+
+## Mapper.xml中插入`List<T>`时，SQL的写法
+
+插入列表时，`mapper`接口写法：
+
+    void saveUser(@Param("users") List<User> users);
+    
+`Mapper.xml`写法：
+`collection`参数（"users"）与接口`Param`参数（"users"）一致；
+`item`参数（"user"）与`#{}`中参数（"user"）一致，具体写法如下：
+
+    <insert id="saveUser" parameterType="com.mao.entity.User">
+        INSERT INTO user(name,phone) VALUES
+        <foreach collection="users" item="user" separator=",">
+            (#{user.name},#{user.phone})
+        </foreach>
+    </insert>
