@@ -109,9 +109,9 @@ public class SystemServiceImpl extends BaseService implements SystemService {
      */
     @Override
     public ResponseData getUsers(Integer role, String name, String login) {
+        if (null == role || role < 0) role = 0;
         if (SU.isEmpty(name)) name = null;
         if (SU.isEmpty(login)) login = null;
-        if (null == role || role < 0) role = 0;
         int count = userMapper.getUserCount(role,name,login);
         if (count > 0)
             count = (count/10) + 1;
@@ -295,18 +295,22 @@ public class SystemServiceImpl extends BaseService implements SystemService {
     @Transactional
     @Override
     public ResponseData updateUserImage(MultipartFile file) {
+        //无文件
         if (file.isEmpty() || file.getSize() <= 0)
             return bad("image file is not found");
-        long MAX_FILE = 512000L;
-        if (file.getSize() > MAX_FILE)
+        //文件过大
+        if (file.getSize() > config.getMaxImageSize())
             return bad("image file is too large,max size is 500K");
         String name = file.getOriginalFilename();
+        //文件无名称
+        if (SU.isEmpty(name))
+            return bad("cannot get file name");
         String name_fix = name.substring(name.lastIndexOf("."));
         String new_name = SU.getRandomString(32)+name_fix;
-        File final_file = new File(config.getLocationPath()+new_name);
+        File final_file = new File(config.getLocationPath()+config.getUserLinkPath()+new_name);
         try {
             file.transferTo(final_file);
-            String linkPath = config.getLinkPath()+new_name;
+            String linkPath = config.getLinkPath()+config.getUserLinkPath()+new_name;
             //保存至数据库
             String login = (String) getSubject().getPrincipal();
             userMapper.updateUserImageByLogin(linkPath,login);

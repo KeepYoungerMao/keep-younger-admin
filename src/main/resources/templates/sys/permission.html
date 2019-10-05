@@ -14,9 +14,37 @@
     <div th:replace="common/header::header"></div><!-- header -->
     <div th:replace="common/side::side"></div><!-- side -->
     <div class="mao-body">
-        <h1 class="title-tips">角色权限管理页面</h1>
+        <div class="mao-sign">
+            <span>系统管理</span><span>/</span><span>角色权限管理</span>
+        </div>
+        <div class="mao-search">
+            <button class="green" onclick="save()">
+                <i class="fa fa-plus"></i><span>新增</span>
+            </button>
+            <button class="green" onclick="flush()">
+                <i class="fa fa-refresh"></i><span>刷新</span>
+            </button>
+        </div>
+        <div class="mao-data">
+            <table id="role-data" border="1" cellspacing="0" cellpadding="0" width="98%">
+                <tr>
+                    <th width="15%">序号</th>
+                    <th width="15%">名称</th>
+                    <th width="40%">介绍</th>
+                    <th width="30%">操作</th>
+                </tr>
+            </table>
+        </div>
+        <div class="mao-page">
+            <span>
+                数据已全部显示
+            </span>
+        </div>
     </div>
 </div>
 </body>
-
+<script th:src="@{/static/js/util/ajax-redirect.js}"></script>
+<script th:src="@{/static/js/util/pop.js}"></script>
+<script th:src="@{/static/js/header.js}"></script>
+<script th:src="@{/static/js/sys/permission.js}"></script>
 </html>

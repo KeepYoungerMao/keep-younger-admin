@@ -31,4 +31,7 @@ public class Config {
     @Value("${user-image-link-pre}")
     private String linkPath;
 
+    @Value("${user-image-link-package}")
+    private String userLinkPath;
+
 }

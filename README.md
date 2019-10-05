@@ -32,7 +32,7 @@ spring、spring boot、mybatis、thymeleaf、shiro
 去掉勾选，保存。\
 黄色警告解除，但会有淡绿色底色，有洁癖的可以找： \
 `settings` -- `Editor` -- `Color Scheme` -- `General` \
-面板中的 `Folded text with highlighting`，将右边的`Background`勾选去掉。（我试的绿色去不掉。。）
+面板中的 `code`中的`injected language fragment`，将右边的`Background`勾选去掉。
 
 ***
 
