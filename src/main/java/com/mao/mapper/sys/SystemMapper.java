@@ -30,7 +30,7 @@ public interface SystemMapper {
     //保存一个角色数据
     void saveRole(Role role);
 
-    //获取所有权限列表
-    List<Permission> getPermissions();
+    //根据角色id获取该角色权限id列表
+    List<Integer> getPermissionIdsByRoleId(@Param("role") int role);
 
 }

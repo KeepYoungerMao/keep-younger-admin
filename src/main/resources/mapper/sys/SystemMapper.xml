@@ -27,8 +27,8 @@
         VALUES(#{name},#{intro})
     </insert>
     
-    <select id="getPermissions" resultType="com.mao.entity.sys.Permission">
-        SELECT `id`,`url`,`intro` FROM sys_permission
+    <select id="getPermissionIdsByRoleId" resultType="java.lang.Integer">
+        SELECT per_id FROM sys_role_permission_ref WHERE role_id = #{role}
     </select>
 
 </mapper>

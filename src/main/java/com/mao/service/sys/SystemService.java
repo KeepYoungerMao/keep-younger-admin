@@ -18,7 +18,7 @@ public interface SystemService {
     ResponseData saveRole(Role role);
 
     //获取所有权限列表
-    ResponseData getPermissions();
+    ResponseData getPermissions(Integer role);
 
     //查询用户列表
     ResponseData getUser(Integer role, String name, String login, Integer page);

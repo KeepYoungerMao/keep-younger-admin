@@ -2,7 +2,6 @@ package com.mao.service.sys.impl;
 
 import com.mao.config.Config;
 import com.mao.entity.ResponseData;
-import com.mao.entity.sys.Permission;
 import com.mao.entity.sys.Role;
 import com.mao.entity.sys.User;
 import com.mao.mapper.sys.SystemMapper;
@@ -59,13 +58,15 @@ public class SystemServiceImpl extends BaseService implements SystemService {
     }
 
     /**
-     * 获取所有权限列表
+     * 根据角色id获取该角色所有权限列表
+     * @param role 角色id
      * @return 权限列表
      */
     @Override
-    public ResponseData getPermissions() {
-        List<Permission> permissions = systemMapper.getPermissions();
-        return ok(permissions);
+    public ResponseData getPermissions(Integer role) {
+        if (null == role || role < 0) role = 0;
+        List<Integer> ids = systemMapper.getPermissionIdsByRoleId(role);
+        return ok(ids);
     }
 
     /**

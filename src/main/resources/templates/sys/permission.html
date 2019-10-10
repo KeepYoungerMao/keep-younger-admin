@@ -7,10 +7,12 @@
     <link rel="stylesheet" th:href="@{/static/css/common.css}">
     <link rel="stylesheet" th:href="@{/static/css/dark.css}">
     <link rel="stylesheet" th:href="@{/static/font-awesome-4.7.0/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/static/ztree/css/zTreeStyle/zTreeStyle.css}">
+    <link rel="stylesheet" th:href="@{/static/css/sys/permission.css}">
 </head>
 <script th:src="@{/static/js/jquery-1-11-3.js}"></script>
 <body>
-<div class="dark">
+<div class="super dark">
     <div th:replace="common/header::header"></div><!-- header -->
     <div th:replace="common/side::side"></div><!-- side -->
     <div class="mao-body">
@@ -41,10 +43,70 @@
             </span>
         </div>
     </div>
+
+    <!--loading box-->
+    <div id="loading" class="mao-box-zzc mao-load-zzc">
+        <div class="mao-box-point">
+            <i class="fa fa-spinner fa-pulse fa-3x"></i>
+        </div>
+    </div>
+
+    <!-- intro box -->
+    <div id="permission-intro" class="mao-box-zzc">
+        <div class="mao-box-point">
+            <div class="mao-box">
+                <div class="mao-box-title">
+                    <i class="fa fa-address-card-o warn"></i>
+                    <span>角色详细权限信息</span>
+                    <i class="fa fa-times mao-box-close" onclick="intro_close()"></i>
+                </div>
+                <div class="mao-box-content">
+
+                </div>
+                <div class="mao-box-bottom">
+                    <button class="cancel" onclick="intro_close()">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- save and edit box -->
+    <div id="permission-edit" class="mao-box-zzc">
+        <div class="mao-box-point">
+            <div class="mao-box">
+                <div class="mao-box-title">
+                    <i class="fa fa-address-card-o warn"></i>
+                    <span>权限信息变更窗口</span>
+                    <i class="fa fa-times mao-box-close" onclick="edit_close()"></i>
+                </div>
+                <div class="mao-box-content">
+                    <table class="permission-edit-table" border="0" cellspacing="0" cellpadding="0" width="100%">
+                        <tr>
+                            <td width="50%">
+                                <label for="role-name">角色名称:</label><br>
+                                <input id="role-name" type="text"><br>
+                                <label for="role-intro">角色介绍：</label><br>
+                                <textarea id="role-intro"></textarea>
+                            </td>
+                            <td class="permission-ztree-td" width="50%">
+                                <ul id="permission-tree" class="ztree"></ul>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="mao-box-bottom">
+                    <button class="yes" onclick="edit_save()">保存</button>
+                    <button class="cancel" onclick="edit_close()">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 </body>
 <script th:src="@{/static/js/util/ajax-redirect.js}"></script>
 <script th:src="@{/static/js/util/pop.js}"></script>
 <script th:src="@{/static/js/header.js}"></script>
+<script th:src="@{/static/ztree/js/jquery.ztree.all.js}"></script>
 <script th:src="@{/static/js/sys/permission.js}"></script>
 </html>

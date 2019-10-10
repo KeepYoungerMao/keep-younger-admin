@@ -43,13 +43,14 @@ public class SystemController {
     }
 
     /**
-     * 获取所有权限列表
+     * 根据角色id获取该角色所有权限列表
+     * @param role 角色id
      * @return 权限列表
      */
     @GetMapping("permission")
     @RequiresPermissions("sys_permission_list")
-    public ResponseData getPermissions(){
-        return systemService.getPermissions();
+    public ResponseData getPermissions(Integer role){
+        return systemService.getPermissions(role);
     }
 
     /**
