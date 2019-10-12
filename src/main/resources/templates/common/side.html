@@ -21,19 +21,19 @@
                 </a>
                 <i class="mao-zs fa fa-angle-down"></i>
             </div>
-            <div class="mao-menu-item mao-item-s">
+            <div class="mao-menu-item mao-item-s" data-url="/sys/user">
                 <a th:href="@{/sys/user}">
                     <i class="fa fa-scribd"></i>
                     <span>用户管理</span>
                 </a>
             </div>
-            <div class="mao-menu-item mao-item-s">
+            <div class="mao-menu-item mao-item-s" data-url="/sys/permission">
                 <a th:href="@{/sys/permission}">
                     <i class="fa fa-scribd"></i>
                     <span>角色权限管理</span>
                 </a>
             </div>
-            <div class="mao-menu-item mao-item-s">
+            <div class="mao-menu-item mao-item-s" data-url="/sys/self">
                 <a th:href="@{/sys/self}">
                     <i class="fa fa-scribd"></i>
                     <span>个人资料管理</span>
@@ -52,6 +52,13 @@
                 $(this).siblings().css("height","44px");
             }
         });
+        //根据url展开相应菜单，并设置active
+        var url = window.location.pathname;
+        var div = document.querySelector('.mao-menu .mao-menu-item[data-url="'+url+'"]');
+        $(div).addClass("mao-menu-active");
+        var pDiv = $(div).siblings(".mao-item-p");
+        $(pDiv).addClass("mao-open");
+        $(pDiv).siblings().css("height","44px");
     </script>
 
 </div>

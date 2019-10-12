@@ -1,0 +1,20 @@
+# 记录权限数据
+系统管理（1）
+    用户管理（11）
+        进入用户页面          （1101）（sys_user_page）
+        查询用户列表          （1102）（sys_user_list）
+        查询用户总条目        （1103）（sys_user_count）
+        查看用户详细信息      （1104）（sys_user_data）
+        新增用户数据          （1105）（sys_user_add）
+        更新用户数据          （1106）（sys_user_update）
+    角色权限管理（12）
+        进入角色权限管理页面  （1201）（sys_permission_page）
+        查询角色列表          （1202）（sys_role_list）
+        查询角色的权限详情    （1203）（sys_permission_list）
+        新增角色数据          （1204）（sys_role_add）
+        更新角色数据          （1205）（sys_role_update）
+    个人资料管理（13）
+        进入个人资料页面      （1301）（sys_self_page）
+        更新个人资料          （1302）（sys_self_update）
+        更新个人便签          （1303）（sys_self_note_update）
+        更新个人头像          （1304）（sys_self_image_update）

@@ -3,6 +3,7 @@ package com.mao.service.sys.impl;
 import com.mao.config.Config;
 import com.mao.entity.ResponseData;
 import com.mao.entity.sys.Role;
+import com.mao.entity.sys.RoleDo;
 import com.mao.entity.sys.User;
 import com.mao.mapper.sys.SystemMapper;
 import com.mao.mapper.sys.UserMapper;
@@ -17,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -52,9 +54,74 @@ public class SystemServiceImpl extends BaseService implements SystemService {
      */
     @Transactional
     @Override
-    public ResponseData saveRole(Role role) {
+    public ResponseData saveRole(RoleDo role) {
+        String check = checkRole(role);
+        if(null != check)
+            return bad(check);
+        List<Integer> ids = getPermissionIds(role.getPermissions());
+        //保存角色
         systemMapper.saveRole(role);
-        return role.getId() > 0 ? ok("saved as "+role.getId()) : bad("failed to save");
+        int id = role.getId();
+        if (id <= 0)
+            return bad("保存失败");
+        //保存该角色权限
+        if (ids.size() > 0)
+            systemMapper.savePermissions(ids,id);
+        return ok("保存成功");
+    }
+
+    /**
+     * 更新一个角色数据
+     * @param role 角色数据
+     * @return 成功 / 失败
+     */
+    @Transactional
+    @Override
+    public ResponseData updateRole(RoleDo role) {
+        if (role.getId() <= 0)
+            return bad("无效id");
+        String check = checkRole(role);
+        if(null != check)
+            return bad(check);
+        List<Integer> ids = getPermissionIds(role.getPermissions());
+        //更新角色
+        systemMapper.updateRole(role);
+        //删除原关联数据
+        systemMapper.delPermissionByRoleId(role.getId());
+        //添加新数据
+        systemMapper.savePermissions(ids,role.getId());
+        return ok("保存成功");
+    }
+
+    /**
+     * 提出不正常id
+     * @param ids 权限id列表
+     * @return 权限id列表
+     */
+    private List<Integer> getPermissionIds(List<Integer> ids){
+        List<Integer> list = new ArrayList<>();
+        for (Integer id : ids) {
+            if (null != id && id > 0){
+                list.add(id);
+            }
+        }
+        return list;
+    }
+
+    /**
+     * 角色保存或更新之前的检查
+     * @param role 角色数据
+     * @return null / 错误信息
+     */
+    private String checkRole(RoleDo role){
+        if (SU.isEmpty(role.getName()))
+            return "缺少角色名称";
+        if (SU.isEmpty(role.getIntro()))
+            return "缺少角色描述";
+        int count = systemMapper.getCountByRoleName(role.getName(),role.getId());
+        if (count > 0)
+            return "角色名称已经使用过";
+        return null;
     }
 
     /**

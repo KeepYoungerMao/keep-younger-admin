@@ -1,0 +1,21 @@
+[
+  {"id":0,"level":1,"i":"gears","name":"系统管理"},
+    {"id":0,"level":2,"i":"user-o","name":"用户管理"},
+      {"id":1101,"level":3,"i":"newspaper-o","name":"进入用户页面"},
+      {"id":1102,"level":3,"i":"reorder","name":"查询用户列表"},
+      {"id":1103,"level":3,"i":"cubes","name":"查询用户总条目"},
+      {"id":1104,"level":3,"i":"search","name":"查看用户详细信息"},
+      {"id":1105,"level":3,"i":"plus-square-o","name":"新增用户数据"},
+      {"id":1106,"level":3,"i":"edit","name":"更新用户数据"},
+    {"id":0,"level":2,"i":"anchor","name":"角色权限管理"},
+      {"id":1201,"level":3,"i":"newspaper-o","name":"进入角色权限管理页面"},
+      {"id":1202,"level":3,"i":"reorder","name":"查询角色列表"},
+      {"id":1203,"level":3,"i":"search","name":"查询角色的权限详情"},
+      {"id":1204,"level":3,"i":"plus-square-o","name":"新增角色数据"},
+      {"id":1205,"level":3,"i":"edit","name":"更新角色数据"},
+    {"id":0,"level":2,"i":"id-card-o","name":"个人资料管理"},
+      {"id":1301,"level":3,"i":"newspaper-o","name":"进入个人资料页面"},
+      {"id":1302,"level":3,"i":"edit","name":"更新个人资料"},
+      {"id":1303,"level":3,"i":"bookmark-o","name":"更新个人便签"},
+      {"id":1304,"level":3,"i":"file-image-o","name":"更新个人头像"}
+]

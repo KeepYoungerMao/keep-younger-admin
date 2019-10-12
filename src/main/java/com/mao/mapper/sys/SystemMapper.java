@@ -2,6 +2,7 @@ package com.mao.mapper.sys;
 
 import com.mao.entity.sys.Permission;
 import com.mao.entity.sys.Role;
+import com.mao.entity.sys.RoleDo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -28,9 +29,21 @@ public interface SystemMapper {
     List<Role> getRoles();
 
     //保存一个角色数据
-    void saveRole(Role role);
+    void saveRole(RoleDo role);
+
+    //更新一个角色数据
+    void updateRole(RoleDo role);
+
+    //根据名称查询是否存在（有id时排除id）
+    int getCountByRoleName(@Param("name") String name, @Param("id") int id);
 
     //根据角色id获取该角色权限id列表
     List<Integer> getPermissionIdsByRoleId(@Param("role") int role);
+
+    //保存角色的权限列表
+    void savePermissions(@Param("ids") List<Integer> ids, @Param("role") int role);
+
+    //根据角色id删除权限（删除关联表数据）
+    void delPermissionByRoleId(@Param("role") int role);
 
 }

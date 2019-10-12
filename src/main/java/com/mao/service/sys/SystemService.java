@@ -1,7 +1,7 @@
 package com.mao.service.sys;
 
 import com.mao.entity.ResponseData;
-import com.mao.entity.sys.Role;
+import com.mao.entity.sys.RoleDo;
 import com.mao.entity.sys.User;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,7 +15,10 @@ public interface SystemService {
     ResponseData getRoles();
 
     //保存一个角色数据
-    ResponseData saveRole(Role role);
+    ResponseData saveRole(RoleDo role);
+
+    //更新一个角色数据
+    ResponseData updateRole(RoleDo role);
 
     //获取所有权限列表
     ResponseData getPermissions(Integer role);
@@ -46,4 +49,5 @@ public interface SystemService {
 
     //更新用户头像
     ResponseData updateUserImage(MultipartFile file);
+
 }

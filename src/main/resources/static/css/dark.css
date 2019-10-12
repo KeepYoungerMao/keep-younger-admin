@@ -55,6 +55,10 @@
     background-color: #555555;
     border-right: 4px solid #888;
 }
+.dark .mao-menu .mao-menu-active{
+    background-color: #555555;
+    border-right: 4px solid #888;
+}
 .dark .mao-menu .mao-item-p a{
     color: #c1c1c1;
 }
@@ -66,7 +70,7 @@
     border-top: 1px solid #333;
     border-bottom: 1px solid #333;
 }
-.dark .mao-menu .mao-item-s{
+.dark .mao-item-s{
     background-color: #4a4a4a;
 }
 

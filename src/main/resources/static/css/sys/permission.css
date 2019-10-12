@@ -30,3 +30,37 @@
     background-color: #666;
     border: 1px #888 solid;
 }
+
+.permission-intro-table,.permission-intro-table tr,.permission-intro-table td{
+    width: 100%;
+}
+.permission-intro-table tr{
+    height: 26px;
+    line-height: 26px;
+}
+.permission-intro-table .l, .permission-intro-table .gou{
+    margin: 0 10px;
+}
+.permission-intro-table .x{
+    padding-left: 10px;
+}
+.permission-intro-table .xx{
+    padding-left: 50px;
+}
+.permission-intro-table .xxx{
+    padding-left: 90px;
+}
+.permission-intro-table span.has{
+    font-weight: bold;
+    /*color: greenyellow;*/
+    color: gold;
+}
+.permission-intro-table i.has{
+    color: gold;
+    /*color: greenyellow;*/
+    font-size: 15px;
+}
+.permission-intro-table .gou{
+    color: #00f600;
+    font-size: 16px;
+}

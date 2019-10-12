@@ -33,8 +33,43 @@ $(function () {
             });
         }
     });
+    //初始化权限详情信息
+    permission_intro();
+    //加载角色列表
     flush();
 });
+
+/**
+ * 初始化权限详情信息
+ */
+function permission_intro() {
+    jqxhr = $.ajax({
+        url: '/static/data/permission-intro.json',
+        success: function (data) {
+            var table = $(".permission-intro-table");
+            for(var i = 0,len = data.length; i < len; i++){
+                var x = getX(data[i].level);
+                var tr = '<tr><td data-id="'+data[i].id+'" class="'+x+'">'+
+                    '<i class="l fa fa-'+data[i].i+'"></i><span>'+data[i].name+'</span>'+
+                    '</td></tr>';
+                $(table).append(tr);
+            }
+        }
+    });
+}
+
+function getX(level) {
+    switch(level){
+        case 1:
+            return "x";
+        case 2:
+            return "xx";
+        case 3:
+            return "xxx";
+        default:
+            return "x";
+    }
+}
 
 /**
  * 加载数据
@@ -84,6 +119,29 @@ function load() {
 function intro(id) {
     //显示详情框
     $("#permission-intro").show();
+    //请求权限数据
+    jqxhr = $.ajax({
+        url: '/v/sys/permission',
+        type: 'GET',
+        data: {'role':id},
+        success: function (data) {
+            if (data.code == 200){
+                var ids = data.data;
+                for(var i = 0,len = ids.length; i < len; i++){
+                    //点亮
+                    var td = document.querySelector('.permission-intro-table .xxx[data-id="'+ids[i]+'"]');
+                    $(td).find("i").addClass("has");
+                    $(td).find("span").addClass("has");
+                    $(td).append('<b class="gou fa fa-check-circle-o"></b>');
+                }
+            }else{
+                pop("请求数据失败。提示信息："+data.data.err_msg,1);
+            }
+        },
+        error: function () {
+            pop("请求数据失败，网络错误",1);
+        }
+    });
 }
 
 /**
@@ -91,6 +149,11 @@ function intro(id) {
  */
 function intro_close() {
     $("#permission-intro").hide();
+    //去除选中样式
+    var table = $(".permission-intro-table");
+    $(table).find("td i").removeClass("has");
+    $(table).find("td span").removeClass("has");
+    $(table).find("td b").remove();
 }
 
 /**
@@ -101,7 +164,7 @@ function edit_close() {
 }
 
 /**
- * 修改该角色的权限
+ * 修改该角色的权限：回显角色权限数据
  * @param id 角色id
  * @param name
  * @param intro
@@ -115,6 +178,8 @@ function update(id,name,intro) {
             if (data.code == 200){
                 //打开编辑窗口
                 $("#permission-edit").show();
+                //赋值id
+                $("#role-id").val(id);
                 //赋值数据
                 $("#role-name").val(name);
                 $("#role-intro").val(intro);
@@ -134,16 +199,88 @@ function update(id,name,intro) {
 }
 
 /**
- * 保存编辑的数据
+ * 保存编辑的数据，更新或保存
  */
 function edit_save() {
-    var checked = zTreeObj.getCheckedNodes();
-    var ids = [];
-    for(var i = 0,len = checked.length; i < len; i++){
-        if(checked[i].id > 0)
-            ids.push(checked[i].id);
+    //获取角色数据
+    var id = $("#role-id").val();
+    var name = $("#role-name").val();
+    var intro = $("#role-intro").val();
+    if(undefined == name || null == name || '' == name)
+        tips("角色名称不能为空");
+    else {
+        if (undefined == intro || null == intro || '' == intro){
+            tips("角色描述不能为空");
+        }else{
+            var checked = zTreeObj.getCheckedNodes();
+            var ids = [];
+            for(var i = 0,len = checked.length; i < len; i++){
+                if(checked[i].id > 1000)
+                    ids.push(checked[i].id);
+            }
+            var role;
+            if(undefined == id || null == id || '' == id){
+                //新增
+                role = {
+                    name: name,
+                    intro: intro,
+                    permissions: ids
+                };
+                jqxhr = $.ajax({
+                    url: '/v/sys/role',
+                    type: 'put',
+                    data: JSON.stringify(role),
+                    headers: {'Content-Type':'application/json','Accept':'*/*'},
+                    success: function (data) {
+                        if (data.code == 200){
+                            //隐藏编辑框
+                            $("#permission-edit").hide();
+                            //提示成功
+                            tips("保存成功");
+                            //刷新列表
+                            flush();
+                        }else{
+                            //提示错误
+                            pop("保存失败。提示信息："+data.data.err_msg,1);
+                        }
+                    },
+                    error: function () {
+                        pop("网络错误。保存失败！",1);
+                    }
+                });
+            }else{
+                //更新
+                role = {
+                    id: parseInt(id),
+                    name: name,
+                    intro: intro,
+                    permissions: ids
+                };
+                jqxhr = $.ajax({
+                    url: '/v/sys/role',
+                    type: 'post',
+                    data: JSON.stringify(role),
+                    headers: {'Content-Type':'application/json','Accept':'*/*'},
+                    success: function (data) {
+                        if (data.code == 200){
+                            //隐藏编辑框
+                            $("#permission-edit").hide();
+                            //提示成功
+                            tips("更新成功");
+                            //刷新列表
+                            flush();
+                        }else{
+                            //提示错误
+                            pop("更新失败。提示信息："+data.data.err_msg,1);
+                        }
+                    },
+                    error: function () {
+                        pop("网络错误。更新失败！",1);
+                    }
+                });
+            }
+        }
     }
-    console.log(ids);
 }
 
 /**
@@ -163,7 +300,8 @@ function del_do(id) {
 }
 
 /**
- * 新增数据
+ * 新增数据：开启编辑框，清空数据
+ * 新增数据的保存见：edit_save()
  */
 function save() {
     $("#permission-edit").show();

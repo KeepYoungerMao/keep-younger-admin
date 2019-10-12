@@ -1,7 +1,7 @@
 package com.mao.mvc.sys;
 
 import com.mao.entity.ResponseData;
-import com.mao.entity.sys.Role;
+import com.mao.entity.sys.RoleDo;
 import com.mao.entity.sys.User;
 import com.mao.service.sys.SystemService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -38,8 +38,19 @@ public class SystemController {
      */
     @PutMapping("role")
     @RequiresPermissions("sys_role_add")
-    public ResponseData saveRole(@RequestBody Role role){
+    public ResponseData saveRole(@RequestBody RoleDo role){
         return systemService.saveRole(role);
+    }
+
+    /**
+     * 更新一个角色数据
+     * @param role 角色数据
+     * @return 成功 / 失败
+     */
+    @PostMapping("role")
+    @RequiresPermissions("sys_role_update")
+    public ResponseData updateRole(@RequestBody RoleDo role){
+        return systemService.updateRole(role);
     }
 
     /**
@@ -131,6 +142,7 @@ public class SystemController {
      * @return 成功 / 失败
      */
     @PostMapping("self/note")
+    @RequiresPermissions("sys_self_note_update")
     public ResponseData updateUserNote(Integer id, String note){
         return systemService.updateUserNote(id,note);
     }
@@ -141,6 +153,7 @@ public class SystemController {
      * @return 成功 / 失败
      */
     @PostMapping("self/image")
+    @RequiresPermissions("sys_self_image_update")
     public ResponseData updateUserImage(@RequestParam("file") MultipartFile file){
         return systemService.updateUserImage(file);
     }

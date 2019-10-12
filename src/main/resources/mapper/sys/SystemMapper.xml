@@ -22,13 +22,35 @@
     </select>
 
     <insert id="saveRole" useGeneratedKeys="true" keyProperty="id"
-            parameterType="com.mao.entity.sys.Role">
+            parameterType="com.mao.entity.sys.RoleDo">
         INSERT INTO sys_role(`name`,`intro`)
         VALUES(#{name},#{intro})
     </insert>
+
+    <update id="updateRole" parameterType="com.mao.entity.sys.RoleDo">
+        UPDATE sys_role SET `name` = #{name},`intro` = #{intro} WHERE `id` = #{id}
+    </update>
+
+    <select id="getCountByRoleName" resultType="java.lang.Integer">
+        SELECT COUNT(`id`) FROM sys_role WHERE `name` = #{name}
+        <if test="id > 0">
+            AND `id` != #{id}
+        </if>
+    </select>
     
     <select id="getPermissionIdsByRoleId" resultType="java.lang.Integer">
         SELECT per_id FROM sys_role_permission_ref WHERE role_id = #{role}
     </select>
+    
+    <insert id="savePermissions">
+        INSERT INTO sys_role_permission_ref(`role_id`,`per_id`) VALUES
+        <foreach collection="ids" item="id" separator=",">
+            (#{role},#{id})
+        </foreach>
+    </insert>
+    
+    <delete id="delPermissionByRoleId" parameterType="java.lang.Integer">
+        DELETE FROM sys_role_permission_ref WHERE role_id = #{role}
+    </delete>
 
 </mapper>
