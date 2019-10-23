@@ -145,3 +145,30 @@ ajax请求默认不支持重定向。ajax请求是局部刷新，不会重新刷
             (#{user.name},#{user.phone})
         </foreach>
     </insert>
+
+***
+
+## MySQL 启动错误：CLIENT_PLUGIN_AUTH is required
+
+使用spring boot 2.0之后，springboot的mysql Driver变成了：
+
+    com.mysql.cj.jdbc.Driver
+在使用老MySQL的时候就会出现此类错误。因此需要更换以下MySQL驱动：
+由（2.0版本的MySQL驱动都是8.* 的）：
+
+    <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <scope>runtime</scope>
+    </dependency>
+改为：
+
+    <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>5.1.34</version>
+    </dependency>
+驱动改完后，Driver也变成了原来的：
+
+    com.mysql.jdbc.Driver
+    
